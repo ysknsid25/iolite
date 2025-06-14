@@ -11,14 +11,14 @@ class IntegerCharacterTest {
 
     @ParameterizedTest
     @MethodSource("validIntegerInputs")
-    fun `valid IntegerCharactor inputs should create successfully`(input: String) {
+    fun `valid IntegerCharacter inputs should create successfully`(input: String) {
         val integerCharacter = IntegerCharacter.of(input)
         assertEquals(input, integerCharacter.get())
     }
 
     @ParameterizedTest
     @MethodSource("invalidIntegerInputs")
-    fun `invalid IntegerCharactor inputs should throw exceptions`(input: String) {
+    fun `invalid IntegerCharacter inputs should throw exceptions`(input: String) {
         assertThrows<IllegalArgumentException> { IntegerCharacter.of(input) }
     }
 
