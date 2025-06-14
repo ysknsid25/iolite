@@ -18,7 +18,7 @@ value class Url private constructor(private val value: String) : StringValueObje
             val normalized = input.trim()
             require(
                 Regex(
-                    "^(https?)://(?!localhost)(?!-)[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9](\\.[a-zA-Z]{2,})+(:[0-9]{1,5})?(/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]*)?$"
+                    "^(https?)://(?!-)[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9](\\.[a-zA-Z]{2,})+(:[0-9]{1,5})?(/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]*)?$"
                 ).matches(normalized) && normalized.length <= MAX_URL_LENGTH
             ) {
                 "Invalid URL: $input"
