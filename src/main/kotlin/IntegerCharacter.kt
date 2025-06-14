@@ -23,7 +23,7 @@ value class IntegerCharacter private constructor(private val value: String) : St
             require(
                 Regex("^[+-]?(0|[1-9][0-9]*)\$").matches(input)
             ) {
-                "Invalid Integer Charactor: $input"
+                "Invalid Integer Character: $input"
             }
             return IntegerCharacter(input)
         }
