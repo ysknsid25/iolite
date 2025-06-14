@@ -3,6 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     kotlin("jvm") version "2.0.21"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
 }
 
 group = "inorin"
