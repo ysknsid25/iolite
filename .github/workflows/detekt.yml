@@ -1,9 +1,14 @@
 name: detekt
 
-on: push
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - release/*
 
 jobs:
-  static-code-analyze:
+  detekt:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
