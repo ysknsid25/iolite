@@ -7,6 +7,10 @@ on:
       - develop
       - release/*
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   ci:
     runs-on: ubuntu-latest
