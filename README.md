@@ -1,6 +1,6 @@
 # iolite
 
-Value Objects for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod).
+Value Objects for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). **We never use 3rd party libraries**.
 
 ## Origin of project name
 
