@@ -1,4 +1,4 @@
-name: unit-test
+name: ci
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
       - release/*
 
 jobs:
-  unit-test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project sources
@@ -17,6 +17,8 @@ jobs:
         uses: gradle/gradle-build-action@v3
       - name: Executable Gradlew file
         run: chmod +x ./gradlew
+      - name: Run detekt
+        run: ./gradlew detekt
       - name: Run unit tests
         run: ./gradlew test
       - name: Generate kover coverage report
@@ -26,7 +28,7 @@ jobs:
         uses: mi-kas/kover-report@v1
         with:
           path: |
-            ${{ github.workspace }}/iolite/build/reports/kover/report.xml
+            ${{ github.workspace }}/build/reports/kover/report.xml
           title: Code Coverage
           update-comment: true
           min-coverage-overall: 80
