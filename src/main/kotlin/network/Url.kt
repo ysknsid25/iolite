@@ -15,7 +15,7 @@ value class Url(private val value: String) : ValueObject {
         ) {
             "Invalid URL: $value"
         }
-        return value
+        return normalized
     }
 
     companion object {

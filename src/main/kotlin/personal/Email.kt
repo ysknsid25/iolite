@@ -15,6 +15,6 @@ value class Email(private val value: String) : ValueObject {
         ) {
             "Invalid email address: $value"
         }
-        return value
+        return normalized
     }
 }
