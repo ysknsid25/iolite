@@ -12,15 +12,15 @@ class EmailTest {
     @ParameterizedTest
     @MethodSource("validEmails")
     fun `should create Email instance for valid email`(validEmail: String) {
-        val email = Email.parse(validEmail)
-        assertEquals(validEmail.trim().lowercase(), email.get())
+        val email = Email(validEmail)
+        assertEquals(validEmail.trim().lowercase(), email.parse())
     }
 
     @ParameterizedTest
     @MethodSource("invalidEmails")
     fun `should throw IllegalArgumentException for invalid email`(invalidEmail: String) {
         val exception = assertThrows(IllegalArgumentException::class.java) {
-            Email.parse(invalidEmail)
+            Email(invalidEmail).parse()
         }
         assertEquals("Invalid email address: $invalidEmail", exception.message)
     }
@@ -28,15 +28,15 @@ class EmailTest {
     @ParameterizedTest
     @MethodSource("validEmails")
     fun `safeParse should return success for valid inputs`(validEmail: String) {
-        val result = Email.safeParse(validEmail)
+        val result = Email(validEmail).safeParse()
         assertTrue(result.isSuccess)
-        assertEquals(validEmail.trim().lowercase(), result.getOrThrow().get())
+        assertEquals(validEmail.trim().lowercase(), result.getOrThrow())
     }
 
     @ParameterizedTest
     @MethodSource("invalidEmails")
     fun `safeParse should return failure for invalid inputs`(invalidEmail: String) {
-        val result = Email.safeParse(invalidEmail)
+        val result = Email(invalidEmail).safeParse()
         assertTrue(result.isFailure)
         assertThrows<IllegalArgumentException> { result.getOrThrow() }
     }
