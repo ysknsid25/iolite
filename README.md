@@ -1,8 +1,8 @@
 # 🔮 iolite
 
-Value Objects for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). **We never use 3rd party libraries**.
+Utility Value Objects for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). **We never use 3rd party libraries**.
 
-A **Value Object** is an object whose equality is determined by the "values ​​of its attributes" rather than the object's "identifier."
+A Value Object is an object whose equality is determined by the "values ​​of its attributes" rather than the object's "identifier."
 In Domain-Driven Design (DDD), they are used to clearly model concepts and rules.
 
 # ⚙ Features
