@@ -23,3 +23,6 @@ TBD
 # Basic usage
 
 
+# ✨ Star History ✨
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ysknsid25/iolite&type=Date)](https://star-history.com/#bytebase/star-history&Date)
