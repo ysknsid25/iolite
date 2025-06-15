@@ -11,7 +11,7 @@ plugins {
     id("cl.franciscosolis.sonatype-central-upload") version "1.0.3"
 }
 
-group = "inorin.iolite"
+group = "io.github.ysknsid25.iolite"
 version = "beta"
 
 repositories {
