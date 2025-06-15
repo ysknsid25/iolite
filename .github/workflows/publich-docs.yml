@@ -6,6 +6,9 @@ on:
       - 'v*'   # vで始まるタグ（例 v1.0.0）がpushされた時に実行
   workflow_dispatch:  # 手動トリガーを可能にする
 
+permissions:
+  contents: write
+
 jobs:
   publish-docs:
     runs-on: ubuntu-latest
