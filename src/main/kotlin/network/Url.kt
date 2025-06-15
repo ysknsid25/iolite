@@ -1,37 +1,24 @@
 package inorin.network
 
-import inorin.StringValueObject
+import inorin.ValueObject
 
 @JvmInline
-value class Url private constructor(private val value: String) : StringValueObject {
+value class Url(private val value: String) : ValueObject {
 
-    override fun get(): String {
-        return value
+    @Suppress("MaxLineLength")
+    override fun parse(): String {
+        val normalized = value.trim()
+        require(
+            Regex(
+                "^(https?)://(?!-)[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9](\\.[a-zA-Z]{2,})+(:[0-9]{1,5})?(/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]*)?$"
+            ).matches(normalized) && normalized.length <= MAX_URL_LENGTH
+        ) {
+            "Invalid URL: $value"
+        }
+        return normalized
     }
 
     companion object {
-
         private const val MAX_URL_LENGTH = 2048
-
-        @Suppress("MaxLineLength")
-        fun parse(input: String): Url {
-            val normalized = input.trim()
-            require(
-                Regex(
-                    "^(https?)://(?!-)[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9](\\.[a-zA-Z]{2,})+(:[0-9]{1,5})?(/[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=]*)?$"
-                ).matches(normalized) && normalized.length <= MAX_URL_LENGTH
-            ) {
-                "Invalid URL: $input"
-            }
-            return Url(normalized)
-        }
-
-        fun safeParse(input: String): Result<Url> {
-            return try {
-                Result.success(parse(input))
-            } catch (e: IllegalArgumentException) {
-                Result.failure(e)
-            }
-        }
     }
 }

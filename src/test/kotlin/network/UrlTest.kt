@@ -12,27 +12,27 @@ class UrlTest {
     @ParameterizedTest
     @MethodSource("validUrls")
     fun `valid URLs should parse successfully`(url: String) {
-        assertEquals(url, Url.parse(url).get())
+        assertEquals(url, Url(url).parse())
     }
 
     @ParameterizedTest
     @MethodSource("invalidUrls")
     fun `invalid URLs should throw exceptions`(url: String) {
-        assertThrows<IllegalArgumentException> { Url.parse(url) }
+        assertThrows<IllegalArgumentException> { Url(url).parse() }
     }
 
     @ParameterizedTest
     @MethodSource("validUrls")
     fun `safeParse should return success for valid inputs`(input: String) {
-        val result = Url.safeParse(input)
+        val result = Url(input).safeParse()
         assertTrue(result.isSuccess)
-        assertEquals(input, result.getOrThrow().get())
+        assertEquals(input, result.getOrThrow())
     }
 
     @ParameterizedTest
     @MethodSource("invalidUrls")
     fun `safeParse should return failure for invalid inputs`(input: String) {
-        val result = Url.safeParse(input)
+        val result = Url(input).safeParse()
         assertTrue(result.isFailure)
         assertThrows<IllegalArgumentException> { result.getOrThrow() }
     }
