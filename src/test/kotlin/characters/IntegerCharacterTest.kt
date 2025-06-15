@@ -1,4 +1,6 @@
-import inorin.charactoers.IntegerCharacter
+package characters
+
+import inorin.characters.IntegerCharacter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows
