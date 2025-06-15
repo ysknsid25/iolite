@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.github.ysknsid25.iolite"
-version = "beta"
+version = "beta-v1"
 
 repositories {
     mavenCentral()
