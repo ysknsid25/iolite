@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-docs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +37,21 @@ jobs:
           git add .
           git commit -m "Auto commit code format"
           git push origin ${{ github.head_ref }}
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./docs
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: echo url
+        run: |
+          echo "URL: ${{ steps.deployment.outputs.page_url }}"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
