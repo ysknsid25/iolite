@@ -1,4 +1,4 @@
-package inorin.charactoers
+package inorin.characters
 
 import inorin.ValueObject
 
