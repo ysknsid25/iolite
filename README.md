@@ -78,7 +78,11 @@ val integerString = IntegerString("100000000")
 
 # Installation
 
-TBD
+```
+implementation("io.github.ysknsid25.iolite:iolite:{version}")
+```
+
+refer [here](implementation("io.github.ysknsid25.iolite:iolite:beta"))
 
 # ✨ Star History ✨
 
