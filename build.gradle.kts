@@ -29,6 +29,10 @@ detekt{
     autoCorrect = true
 }
 
+tasks.dokkaHtml.configure {
+    outputDirectory.set(file("${rootProject.projectDir}/docs"))
+}
+
 tasks.test {
     useJUnitPlatform()
 }

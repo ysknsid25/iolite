@@ -3,8 +3,8 @@ name: Deploy Dokka Docs to GitHub Pages
 on:
   push:
     tags:
-      - 'v*'   # vで始まるタグ（例 v1.0.0）がpushされた時に実行
-  workflow_dispatch:  # 手動トリガーを可能にする
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -27,7 +27,16 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
       - name: Build Dokka HTML
+        id: build_dokka
         run: ./gradlew dokkaHtml
+      - name: Commit
+        if: steps.build_dokka.outcome == 'failure'
+        run: |
+          git config user.name "actions-user"
+          git config user.email "action@github.com"
+          git add .
+          git commit -m "Auto commit code format"
+          git push origin ${{ github.head_ref }}
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
