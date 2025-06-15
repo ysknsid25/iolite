@@ -26,7 +26,7 @@ class ValueObjectRuleTest {
     }
 
     @Test
-    fun `value class has companion function named 'of'`() {
+    fun `value class has companion function named 'parse'`() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -38,7 +38,26 @@ class ValueObjectRuleTest {
                 }
                 companionObject.any { obj ->
                     obj.functions(includeNested = false).any { func ->
-                        func.name == "of"
+                        func.name == "parse"
+                    }
+                }
+            }
+    }
+
+    @Test
+    fun `value class has companion function named 'safeParse'`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .filter { it.hasAnnotation { annotation -> annotation.name == "JvmInline" } }
+            .assertTrue {
+                val companionObject = it.objects(includeNested = false).filter { obj ->
+                    obj.hasModifier(KoModifier.COMPANION)
+                }
+                companionObject.any { obj ->
+                    obj.functions(includeNested = false).any { func ->
+                        func.name == "safeParse"
                     }
                 }
             }

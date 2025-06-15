@@ -11,7 +11,7 @@ value class Email private constructor(private val value: String) : StringValueOb
 
     companion object {
         @Suppress("MaxLineLength")
-        fun of(input: String): Email {
+        fun parse(input: String): Email {
             val normalized = input.trim().lowercase()
             require(
                 Regex(
@@ -21,6 +21,14 @@ value class Email private constructor(private val value: String) : StringValueOb
                 "Invalid email address: $input"
             }
             return Email(normalized)
+        }
+
+        fun safeParse(input: String): Result<Email> {
+            return try {
+                Result.success(parse(input))
+            } catch (e: IllegalArgumentException) {
+                Result.failure(e)
+            }
         }
     }
 }
