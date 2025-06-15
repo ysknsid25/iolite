@@ -1,7 +1,7 @@
 package personal
 
-import inorin.characters.IntegerString
 import inorin.personal.Age
+import inorin.strings.IntegerString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -48,7 +48,7 @@ class AgeTest {
     @Test
     fun `parse should work with IntegerCharacter converted to Age`() {
         val validIntegerString = IntegerString("25")
-        val age = Age(validIntegerString.parse().toInt())
+        val age = Age(validIntegerString.parse().parse().toInt())
         assertEquals(25, age.parse())
     }
 

@@ -1,6 +1,6 @@
 package strings
 
-import inorin.characters.IntegerString
+import inorin.strings.IntegerString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows
@@ -13,7 +13,7 @@ class IntegerStringTest {
     @MethodSource("validIntegerInputs")
     fun `valid IntegerCharacter inputs should create successfully`(input: String) {
         val integerString = IntegerString(input)
-        assertEquals(input, integerString.parse())
+        assertEquals(input, integerString.parse().parse())
     }
 
     @ParameterizedTest
@@ -27,7 +27,7 @@ class IntegerStringTest {
     fun `safeParse should return success for valid inputs`(input: String) {
         val result = IntegerString(input).safeParse()
         assertTrue(result.isSuccess)
-        assertEquals(input, result.getOrThrow())
+        assertEquals(input, result.getOrThrow().parse())
     }
 
     @ParameterizedTest

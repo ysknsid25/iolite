@@ -3,7 +3,7 @@ package inorin.personal
 import inorin.ValueObject
 
 @JvmInline
-value class Age(private val value: Int) : ValueObject {
+value class Age(private val value: Int) : ValueObject<Int> {
 
     override fun parse(): Int {
         require(value in MIN_AGE..MAX_AGE) {

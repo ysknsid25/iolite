@@ -3,7 +3,7 @@ package inorin.personal
 import inorin.ValueObject
 
 @JvmInline
-value class Email(private val value: String) : ValueObject {
+value class Email(private val value: String) : ValueObject<String> {
 
     @Suppress("MaxLineLength")
     override fun parse(): String {
