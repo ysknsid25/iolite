@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "inorin"
-version = "1.0-SNAPSHOT"
+version = "beta"
 
 repositories {
     mavenCentral()
