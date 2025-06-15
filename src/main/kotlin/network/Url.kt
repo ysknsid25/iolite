@@ -14,7 +14,7 @@ value class Url private constructor(private val value: String) : StringValueObje
         private const val MAX_URL_LENGTH = 2048
 
         @Suppress("MaxLineLength")
-        fun of(input: String): Url {
+        fun parse(input: String): Url {
             val normalized = input.trim()
             require(
                 Regex(
@@ -24,6 +24,14 @@ value class Url private constructor(private val value: String) : StringValueObje
                 "Invalid URL: $input"
             }
             return Url(normalized)
+        }
+
+        fun safeParse(input: String): Result<Url> {
+            return try {
+                Result.success(parse(input))
+            } catch (e: IllegalArgumentException) {
+                Result.failure(e)
+            }
         }
     }
 }

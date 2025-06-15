@@ -19,13 +19,21 @@ value class IntegerCharacter private constructor(private val value: String) : St
     }
 
     companion object {
-        fun of(input: String): IntegerCharacter {
+        fun parse(input: String): IntegerCharacter {
             require(
                 Regex("^[+-]?(0|[1-9][0-9]*)\$").matches(input)
             ) {
                 "Invalid Integer Character: $input"
             }
             return IntegerCharacter(input)
+        }
+
+        fun safeParse(input: String): Result<IntegerCharacter> {
+            return try {
+                Result.success(parse(input))
+            } catch (e: IllegalArgumentException) {
+                Result.failure(e)
+            }
         }
     }
 }

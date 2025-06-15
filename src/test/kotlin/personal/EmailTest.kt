@@ -3,13 +3,47 @@ package personal
 import inorin.personal.Email
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.provider.MethodSource
 
 class EmailTest {
     @ParameterizedTest
-    @ValueSource(
-        strings = [
+    @MethodSource("validEmails")
+    fun `should create Email instance for valid email`(validEmail: String) {
+        val email = Email.parse(validEmail)
+        assertEquals(validEmail.trim().lowercase(), email.get())
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidEmails")
+    fun `should throw IllegalArgumentException for invalid email`(invalidEmail: String) {
+        val exception = assertThrows(IllegalArgumentException::class.java) {
+            Email.parse(invalidEmail)
+        }
+        assertEquals("Invalid email address: $invalidEmail", exception.message)
+    }
+
+    @ParameterizedTest
+    @MethodSource("validEmails")
+    fun `safeParse should return success for valid inputs`(validEmail: String) {
+        val result = Email.safeParse(validEmail)
+        assertTrue(result.isSuccess)
+        assertEquals(validEmail.trim().lowercase(), result.getOrThrow().get())
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidEmails")
+    fun `safeParse should return failure for invalid inputs`(invalidEmail: String) {
+        val result = Email.safeParse(invalidEmail)
+        assertTrue(result.isFailure)
+        assertThrows<IllegalArgumentException> { result.getOrThrow() }
+    }
+
+    companion object {
+        @JvmStatic
+        fun validEmails() = listOf(
             "email@domain.com",
             "firstname.lastname@domain.com",
             "email@subdomain.domain.com",
@@ -37,16 +71,10 @@ class EmailTest {
             "something@subdomain.domain-with-hyphens.tld",
             "common'name@domain.com",
             "francois@etu.inp-n7.fr"
-        ]
-    )
-    fun `should create Email instance for valid email`(validEmail: String) {
-        val email = Email.of(validEmail)
-        assertEquals(validEmail.trim().lowercase(), email.get())
-    }
+        )
 
-    @ParameterizedTest
-    @ValueSource(
-        strings = [
+        @JvmStatic
+        fun invalidEmails() = listOf(
             "francois@@etu.inp-n7.fr",
             "\"email\"@domain.com",
             "\"john..doe\"@example.org",
@@ -85,12 +113,6 @@ class EmailTest {
             "invalid@[999.465.265.1]",
             "test@.com",
             "aaaaaaaaaaaaaaalongemailthatcausesregexDoSvulnerability@test.c"
-        ]
-    )
-    fun `should throw IllegalArgumentException for invalid email`(invalidEmail: String) {
-        val exception = assertThrows(IllegalArgumentException::class.java) {
-            Email.of(invalidEmail)
-        }
-        assertEquals("Invalid email address: $invalidEmail", exception.message)
+        )
     }
 }
