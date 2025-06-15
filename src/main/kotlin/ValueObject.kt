@@ -1,4 +1,4 @@
-package inorin
+package iolite
 
 interface ValueObject<T> {
     fun parse(): T

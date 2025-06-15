@@ -1,6 +1,6 @@
 package strings
 
-import inorin.strings.DecimalString
+import iolite.strings.DecimalString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest

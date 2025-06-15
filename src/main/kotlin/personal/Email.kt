@@ -1,6 +1,6 @@
-package inorin.personal
+package iolite.personal
 
-import inorin.ValueObject
+import iolite.ValueObject
 
 @JvmInline
 value class Email(private val value: String) : ValueObject<String> {

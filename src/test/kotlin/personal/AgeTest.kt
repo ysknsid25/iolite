@@ -1,7 +1,7 @@
 package personal
 
-import inorin.personal.Age
-import inorin.strings.IntegerString
+import iolite.personal.Age
+import iolite.strings.IntegerString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

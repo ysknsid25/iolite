@@ -1,6 +1,6 @@
-package inorin.strings
+package iolite.strings
 
-import inorin.ValueObject
+import iolite.ValueObject
 
 @JvmInline
 value class DecimalString(private val value: String) : ValueObject<StringValueObject> {

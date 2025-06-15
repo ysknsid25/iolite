@@ -1,6 +1,6 @@
-package inorin.network
+package iolite.network
 
-import inorin.ValueObject
+import iolite.ValueObject
 
 @JvmInline
 value class Url(private val value: String) : ValueObject<String> {

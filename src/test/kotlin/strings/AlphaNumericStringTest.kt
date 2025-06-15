@@ -1,7 +1,7 @@
 package strings
 
-import inorin.strings.AlphaNumericString
-import inorin.strings.StringValueObject
+import iolite.strings.AlphaNumericString
+import iolite.strings.StringValueObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows

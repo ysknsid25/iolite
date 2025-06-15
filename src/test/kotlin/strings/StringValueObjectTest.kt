@@ -1,6 +1,6 @@
 package strings
 
-import inorin.strings.StringValueObject
+import iolite.strings.StringValueObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

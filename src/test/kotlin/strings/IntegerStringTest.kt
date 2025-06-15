@@ -1,6 +1,6 @@
 package strings
 
-import inorin.strings.IntegerString
+import iolite.strings.IntegerString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows
