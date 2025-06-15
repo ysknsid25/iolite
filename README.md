@@ -7,21 +7,7 @@ In Domain-Driven Design (DDD), they are used to clearly model concepts and rules
 
 # ⚙ Features
 
-## Strings
-
-- StringValueObject
-- AlphaNumericString
-- IntegerString
-- DecimalString
-
-## network
-
-- Url
-
-## Personal
-
-- Email
-- Age
+view [iolite API](https://ysknsid25.github.io/iolite/)
 
 # Basic usage
 
