@@ -1,6 +1,6 @@
 # 🔮 iolite
 
- A generic Value Object library for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). **We never use 3rd party libraries**.
+ A generic Value Object library for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). We never use 3rd party libraries.
 
 A Value Object is an object whose equality is determined by the "values ​​of its attributes" rather than the object's "identifier."
 In Domain-Driven Design (DDD), they are used to clearly model concepts and rules.
