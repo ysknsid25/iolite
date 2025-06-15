@@ -1,8 +1,8 @@
 package inorin
 
-interface ValueObject {
-    fun parse(): Any
-    fun safeParse(): Result<Any> {
+interface ValueObject<T> {
+    fun parse(): T
+    fun safeParse(): Result<T> {
         return try {
             Result.success(parse())
         } catch (e: IllegalArgumentException) {

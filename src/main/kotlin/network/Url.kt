@@ -3,7 +3,7 @@ package inorin.network
 import inorin.ValueObject
 
 @JvmInline
-value class Url(private val value: String) : ValueObject {
+value class Url(private val value: String) : ValueObject<String> {
 
     @Suppress("MaxLineLength")
     override fun parse(): String {

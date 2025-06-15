@@ -1,16 +1,16 @@
-package inorin.characters
+package inorin.strings
 
 import inorin.ValueObject
 
 @JvmInline
-value class IntegerString(private val value: String) : ValueObject {
+value class IntegerString(private val value: String) : ValueObject<StringValueObject> {
 
-    override fun parse(): String {
+    override fun parse(): StringValueObject {
         require(
             Regex("^[+-]?(0|[1-9][0-9]*)\$").matches(value)
         ) {
             "Invalid Integer String: $value"
         }
-        return value
+        return StringValueObject(value)
     }
 }
