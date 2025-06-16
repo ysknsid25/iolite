@@ -63,12 +63,16 @@ publishing {
                     url.set("https://github.com/ysknsid25/iolite")
                 }
             }
+            artifact("${rootProject.projectDir}/build/kotlinToolingMetadata/kotlin-tooling-metadata.json") {
+                extension = "json"
+                builtBy(tasks.named("buildKotlinToolingMetadata"))
+            }
         }
     }
 }
 
 tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
-    dependsOn("jar", "sourcesJar", "javadocJar", "generatePomFileForMavenPublication")
+    dependsOn("jar", "sourcesJar", "javadocJar", "buildKotlinToolingMetadata", "generatePomFileForMavenPublication")
 
     username = System.getenv("SONATYPE_CENTRAL_USERNAME")
     password = System.getenv("SONATYPE_CENTRAL_PASSWORD")
