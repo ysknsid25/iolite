@@ -1,3 +1,7 @@
+![Maven Central Version](https://img.shields.io/maven-central/v/io.github.ysknsid25.iolite/iolite)
+![Maven Central Last Update](https://img.shields.io/maven-central/last-update/io.github.ysknsid25.iolite/iolite)
+
+
 # 🔮 iolite
 
  A generic Value Object library for Kotlin. Inspired by [Zod](https://github.com/colinhacks/zod). We never use 3rd party libraries.
