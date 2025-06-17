@@ -17,6 +17,7 @@ value class IpV4(private val value: String) : ValueObject<String> {
     }
 
     companion object {
+        @Suppress("MaxLineLength")
         private val ipv4Regex = Regex(
             "^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\$"
         )
