@@ -42,6 +42,6 @@ jobs:
             ${{ github.workspace }}/build/reports/kover/report.xml
           title: Code Coverage
           update-comment: true
-          min-coverage-overall: 80
-          min-coverage-changed-files: 80
+          min-coverage-overall: 90
+          min-coverage-changed-files: 90
           coverage-counter-type: LINE
