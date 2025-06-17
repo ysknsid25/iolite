@@ -1,5 +1,6 @@
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.ysknsid25.iolite/iolite)
 ![Maven Central Last Update](https://img.shields.io/maven-central/last-update/io.github.ysknsid25.iolite/iolite)
+![Static Badge](https://img.shields.io/badge/coverage-97.69%25-green)
 
 
 # 🔮 iolite
