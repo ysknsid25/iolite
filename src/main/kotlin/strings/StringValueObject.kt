@@ -43,4 +43,21 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
         }
         return this
     }
+
+    fun regex(pattern: String): StringValueObject {
+        require(value.matches(Regex(pattern))) {
+            "Value $value does not match regex pattern $pattern"
+        }
+        return this
+    }
+
+    fun customerValidation(
+        validation: (String) -> Boolean,
+        errorMessage: String
+    ): StringValueObject {
+        require(validation(value)) {
+            errorMessage
+        }
+        return this
+    }
 }
