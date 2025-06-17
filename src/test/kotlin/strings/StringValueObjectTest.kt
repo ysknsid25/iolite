@@ -63,7 +63,7 @@ class StringValueObjectTest {
     fun `regex should throw exception for string not matching regex pattern`() {
         val valueObject = StringValueObject("example123")
         val exception = assertThrows<IllegalArgumentException> {
-            valueObject.regex("^[a-z]+$").parse()
+            valueObject.regex(Regex("^[a-z]+$")).parse()
         }
         assertEquals("Value example123 does not match regex pattern ^[a-z]+$", exception.message)
     }
@@ -89,7 +89,7 @@ class StringValueObjectTest {
             .endWith("suffix")
             .min(10)
             .max(20)
-            .regex("prefix\\d+suffix")
+            .regex(Regex("^[a-zA-Z0-9]+$"))
             .customerValidation(
                 validation = { it.contains("123") },
                 errorMessage = "Custom validation failed"
