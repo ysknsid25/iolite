@@ -60,6 +60,27 @@ class StringValueObjectTest {
     }
 
     @Test
+    fun `regex should throw exception for string not matching regex pattern`() {
+        val valueObject = StringValueObject("example123")
+        val exception = assertThrows<IllegalArgumentException> {
+            valueObject.regex(Regex("^[a-z]+$")).parse()
+        }
+        assertEquals("Value example123 does not match regex pattern ^[a-z]+$", exception.message)
+    }
+
+    @Test
+    fun `customerValidation should throw exception for invalid custom validation`() {
+        val valueObject = StringValueObject("invalid")
+        val exception = assertThrows<IllegalArgumentException> {
+            valueObject.customerValidation(
+                validation = { it.length > 10 },
+                errorMessage = "Custom validation failed"
+            ).parse()
+        }
+        assertEquals("Custom validation failed", exception.message)
+    }
+
+    @Test
     fun `method chaining should succeed and return expected value`() {
         val valueObject = StringValueObject("prefix123suffix")
         val result = valueObject
@@ -68,6 +89,11 @@ class StringValueObjectTest {
             .endWith("suffix")
             .min(10)
             .max(20)
+            .regex(Regex("^[a-zA-Z0-9]+$"))
+            .customerValidation(
+                validation = { it.contains("123") },
+                errorMessage = "Custom validation failed"
+            )
             .parse()
 
         assertEquals("prefix123suffix", result)
