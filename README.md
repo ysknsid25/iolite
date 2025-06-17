@@ -56,6 +56,11 @@ val stringVal = StringValueObject("prefix123suffix")
     .endWith("suffix")
     .min(10)
     .max(20)
+    .regex(Regex("^[a-zA-Z0-9]+$"))
+    .customerValidation(
+        validation = { it.contains("123") },
+        errorMessage = "Custom validation failed"
+    )
     .parse()
 
 val integerString = IntegerString("100000000")
