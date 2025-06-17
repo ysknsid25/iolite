@@ -51,10 +51,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
         return this
     }
 
-    fun customerValidation(
-        validation: (String) -> Boolean,
-        errorMessage: String
-    ): StringValueObject {
+    fun customerValidation(validation: (String) -> Boolean, errorMessage: String): StringValueObject {
         require(validation(value)) {
             errorMessage
         }
