@@ -44,9 +44,9 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
         return this
     }
 
-    fun regex(pattern: String): StringValueObject {
-        require(value.matches(Regex(pattern))) {
-            "Value $value does not match regex pattern $pattern"
+    fun regex(regex: Regex): StringValueObject {
+        require(value.matches(regex)) {
+            "Value $value does not match regex pattern ${regex.pattern}"
         }
         return this
     }
