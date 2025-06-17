@@ -71,6 +71,23 @@ val integerString = IntegerString("100000000")
     .parse()
 ```
 
+## CreditCard
+
+You can validate these credit card brands.
+
+- Amex
+- Diners Club
+- Discover
+- JCB
+- MasterCard
+- Visa
+
+```
+val creditCardNumber = CreditCard("4111111111111111").parse()
+```
+
+this is same logic of [Valibot](https://github.com/fabian-hiller/valibot/blob/54c846ada01af06deccfbd56f68fca362c445fae/library/src/actions/creditCard/creditCard.ts#L118-L146). and By running them through [the same test cases](https://github.com/fabian-hiller/valibot/blob/main/library/src/actions/creditCard/creditCard.test.ts), we can ensure that they are of the same quality.
+
 # Installation
 
 ```
