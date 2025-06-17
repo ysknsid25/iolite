@@ -1,4 +1,4 @@
-package iolite.strings
+package iolite.encoding
 
 import iolite.ValueObject
 

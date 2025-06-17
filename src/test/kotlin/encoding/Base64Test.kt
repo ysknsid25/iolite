@@ -1,6 +1,6 @@
-package strings
+package encoding
 
-import iolite.strings.Base64
+import iolite.encoding.Base64
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
