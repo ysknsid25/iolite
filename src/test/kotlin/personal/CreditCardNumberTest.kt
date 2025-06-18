@@ -1,28 +1,28 @@
 package personal
 
-import iolite.personal.CreditCard
+import iolite.personal.CreditCardNumber
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
-class CreditCardTest {
+class CreditCardNumberTest {
     @ParameterizedTest
     @MethodSource("validCardNumbers")
     fun `valid URLs should parse successfully`(cardNumber: String) {
-        assertEquals(cardNumber, CreditCard(cardNumber).parse())
+        assertEquals(cardNumber, CreditCardNumber(cardNumber).parse())
     }
 
     @ParameterizedTest
     @MethodSource("invalidCardNumbers")
     fun `invalid URLs should throw exceptions`(cardNumber: String) {
-        org.junit.jupiter.api.assertThrows<IllegalArgumentException> { CreditCard(cardNumber).parse() }
+        org.junit.jupiter.api.assertThrows<IllegalArgumentException> { CreditCardNumber(cardNumber).parse() }
     }
 
     @ParameterizedTest
     @MethodSource("validCardNumbers")
     fun `safeParse should return success for valid inputs`(cardNumber: String) {
-        val result = CreditCard(cardNumber).safeParse()
+        val result = CreditCardNumber(cardNumber).safeParse()
         assertTrue(result.isSuccess)
         assertEquals(cardNumber, result.getOrThrow())
     }
@@ -30,7 +30,7 @@ class CreditCardTest {
     @ParameterizedTest
     @MethodSource("invalidCardNumbers")
     fun `safeParse should return failure for invalid inputs`(cardNumber: String) {
-        val result = CreditCard(cardNumber).safeParse()
+        val result = CreditCardNumber(cardNumber).safeParse()
         assertTrue(result.isFailure)
         org.junit.jupiter.api.assertThrows<IllegalArgumentException> { result.getOrThrow() }
     }
