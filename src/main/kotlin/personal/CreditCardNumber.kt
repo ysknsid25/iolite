@@ -3,7 +3,7 @@ package iolite.personal
 import iolite.ValueObject
 
 @JvmInline
-value class CreditCard(private val value: String) : ValueObject<String> {
+value class CreditCardNumber(private val value: String) : ValueObject<String> {
 
     override fun parse(): String {
         require(CREDIT_CARD_REGEX.matches(value)) {
