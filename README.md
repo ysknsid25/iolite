@@ -95,7 +95,7 @@ this is same logic of [Valibot](https://github.com/fabian-hiller/valibot/blob/54
 implementation("io.github.ysknsid25.iolite:iolite:{version}")
 ```
 
-refer [here](implementation("io.github.ysknsid25.iolite:iolite:beta"))
+refer [here](https://mvnrepository.com/artifact/io.github.ysknsid25.iolite/iolite)
 
 # ✨ Star History ✨
 
