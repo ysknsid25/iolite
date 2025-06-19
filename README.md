@@ -1,5 +1,6 @@
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.ysknsid25.iolite/iolite)
 ![Maven Central Last Update](https://img.shields.io/maven-central/last-update/io.github.ysknsid25.iolite/iolite)
+![Static Badge](https://img.shields.io/badge/coverage-97.69%25-green)
 
 
 # 🔮 iolite
@@ -12,6 +13,44 @@ In Domain-Driven Design (DDD), they are used to clearly model concepts and rules
 # ⚙ Features
 
 view [iolite API](https://ysknsid25.github.io/iolite/)
+
+## DateTime
+
+- Date
+- DateTime
+- Time
+
+## Encoding
+
+- Base64
+
+## ID
+
+- UUID
+
+## Network
+
+- CIDR
+- Domain
+- HostName
+- IPV4
+- IPV6
+- MacAddress
+- URL
+
+## Personal
+
+- Age
+- CreditCardNumber
+- Email
+- JP Phone Number
+- JP Postal Code
+
+## Strings
+
+- AlphaNumeric
+- Decimal
+- Integer
 
 # Basic usage
 
@@ -56,6 +95,11 @@ val stringVal = StringValueObject("prefix123suffix")
     .endWith("suffix")
     .min(10)
     .max(20)
+    .regex(Regex("^[a-zA-Z0-9]+$"))
+    .customerValidation(
+        validation = { it.contains("123") },
+        errorMessage = "Custom validation failed"
+    )
     .parse()
 
 val integerString = IntegerString("100000000")
@@ -66,13 +110,30 @@ val integerString = IntegerString("100000000")
     .parse()
 ```
 
+## CreditCard
+
+You can validate these credit card brands.
+
+- Amex
+- Diners Club
+- Discover
+- JCB
+- MasterCard
+- Visa
+
+```
+val creditCardNumber = CreditCard("4111111111111111").parse()
+```
+
+this is same logic of [Valibot](https://github.com/fabian-hiller/valibot/blob/54c846ada01af06deccfbd56f68fca362c445fae/library/src/actions/creditCard/creditCard.ts#L118-L146). and By running them through [the same test cases](https://github.com/fabian-hiller/valibot/blob/main/library/src/actions/creditCard/creditCard.test.ts), we can ensure that they are of the same quality.
+
 # Installation
 
 ```
 implementation("io.github.ysknsid25.iolite:iolite:{version}")
 ```
 
-refer [here](implementation("io.github.ysknsid25.iolite:iolite:beta"))
+refer [here](https://mvnrepository.com/artifact/io.github.ysknsid25.iolite/iolite)
 
 # ✨ Star History ✨
 
