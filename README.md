@@ -14,6 +14,44 @@ In Domain-Driven Design (DDD), they are used to clearly model concepts and rules
 
 view [iolite API](https://ysknsid25.github.io/iolite/)
 
+## DateTime
+
+- Date
+- DateTime
+- Time
+
+## Encoding
+
+- Base64
+
+## ID
+
+- UUID
+
+## Network
+
+- CIDR
+- Domain
+- HostName
+- IPV4
+- IPV6
+- MacAddress
+- URL
+
+## Personal
+
+- Age
+- CreditCardNumber
+- Email
+- JP Phone Number
+- JP Postal Code
+
+## Strings
+
+- AlphaNumeric
+- Decimal
+- Integer
+
 # Basic usage
 
 ```
