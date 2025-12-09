@@ -1,4 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import cl.franciscosolis.sonatypecentralupload.SonatypeCentralUploadTask
+
 
 plugins {
     kotlin("multiplatform") version "2.0.21"
@@ -6,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.9.1"
     id("org.jetbrains.dokka") version "2.0.0"
     `maven-publish`
+    id("cl.franciscosolis.sonatype-central-upload") version "1.0.3"
 }
 
 group = "io.github.ysknsid25.iolite"
@@ -47,7 +50,7 @@ detekt{
 
 publishing {
     publications {
-        named<MavenPublication>("kotlinMultiplatform") {
+        register<MavenPublication>("maven") {
             pom {
                 name.set(project.name)
                 description.set("A generic Value Object library inspired by Zod for Kotlin")
@@ -70,8 +73,31 @@ publishing {
                     url.set("https://github.com/ysknsid25/iolite")
                 }
             }
+            artifact("${rootProject.projectDir}/build/kotlinToolingMetadata/kotlin-tooling-metadata.json") {
+                extension = "json"
+                builtBy(tasks.named("buildKotlinToolingMetadata"))
+            }
         }
     }
+}
+
+tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
+    dependsOn("jar", "sourcesJar", "javadocJar", "buildKotlinToolingMetadata", "generatePomFileForMavenPublication")
+
+    username = System.getenv("SONATYPE_CENTRAL_USERNAME")
+    password = System.getenv("SONATYPE_CENTRAL_PASSWORD")
+
+    archives = files(
+        tasks.named("jar"),
+        tasks.named("sourcesJar"),
+        tasks.named("javadocJar"),
+    )
+    pom = file(
+        tasks.named("generatePomFileForMavenPublication").get().outputs.files.single()
+    )
+
+    signingKey = System.getenv("PGP_SIGNING_KEY")
+    signingKeyPassphrase = System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
 }
 
 tasks.dokkaHtml.configure {

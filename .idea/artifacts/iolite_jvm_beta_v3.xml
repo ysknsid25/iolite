@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="iolite-jvm-beta-v3">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="iolite-jvm-beta-v3.jar">
+      <element id="module-output" name="iolite.jvmMain" />
+    </root>
+  </artifact>
+</component>
