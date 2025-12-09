@@ -31,7 +31,7 @@ jobs:
       - name: Run detekt
         run: ./gradlew detekt
       - name: Run unit tests
-        run: ./gradlew test
+        run: ./gradlew check
       - name: Generate kover coverage report
         run: ./gradlew koverXmlReport
       - name: Add coverage report to PR
