@@ -56,15 +56,6 @@ detekt {
     autoCorrect = true
 }
 
-listOf(
-    "SONATYPE_CENTRAL_USERNAME" to "mavenCentralUsername",
-    "SONATYPE_CENTRAL_PASSWORD" to "mavenCentralPassword",
-    "PGP_SIGNING_KEY" to "signingInMemoryKey",
-    "PGP_SIGNING_KEY_PASSPHRASE" to "signingInMemoryKeyPassword",
-).forEach { (envName, propName) ->
-    System.getenv(envName)?.let { extra.set(propName, it) }
-}
-
 mavenPublishing {
     configure(KotlinMultiplatform(javadocJar = JavadocJar.Dokka("dokkaHtml")))
     publishToMavenCentral()
