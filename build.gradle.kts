@@ -98,14 +98,9 @@ mavenPublishing {
     }
 }
 
-afterEvaluate {
-    publishing.publications.named<MavenPublication>("kotlinMultiplatform") {
-        artifact("${rootProject.projectDir}/build/kotlinToolingMetadata/kotlin-tooling-metadata.json") {
-            extension = "json"
-            classifier = "kotlin-tooling-metadata"
-            builtBy(tasks.named("buildKotlinToolingMetadata"))
-        }
-    }
+tasks.named<Jar>("allMetadataJar") {
+    dependsOn(tasks.named("buildKotlinToolingMetadata"))
+    from(tasks.named("buildKotlinToolingMetadata").map { it.outputs.files })
 }
 
 tasks.dokkaHtml.configure {
