@@ -1,0 +1,57 @@
+package id
+
+import iolite.id.Uuid
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
+
+class UuidTest {
+    @Test
+    fun `valid UUIDs should parse successfully`() {
+        for (input in validUUIDs) {
+            assertEquals(input, Uuid(input).parse(), "Failed for input='$input'")
+        }
+    }
+
+    @Test
+    fun `invalid UUIDs should throw exceptions`() {
+        for (input in invalidUUIDs) {
+            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+                Uuid(input).parse()
+            }
+        }
+    }
+
+    @Test
+    fun `safeParse should return success for valid inputs`() {
+        for (input in validUUIDs) {
+            val result = Uuid(input).safeParse()
+            assertTrue(result.isSuccess, "Expected success for input='$input'")
+            assertEquals(input, result.getOrThrow())
+        }
+    }
+
+    @Test
+    fun `safeParse should return failure for invalid inputs`() {
+        for (input in invalidUUIDs) {
+            val result = Uuid(input).safeParse()
+            assertTrue(result.isFailure, "Expected failure for input='$input'")
+            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+        }
+    }
+
+    companion object {
+        private val validUUIDs = listOf(
+            "9491d710-3185-4e06-bea0-6a2f275345e0",
+            "d89e7b01-7598-ed11-9d7a-0022489382fd",
+            "00000000-0000-0000-0000-000000000000",
+            "b3ce60f8-e8b9-40f5-1150-172ede56ff74",
+            "92e76bf9-28b3-4730-cd7f-cb6bc51f8c09",
+        )
+
+        private val invalidUUIDs = listOf(
+            "9491d710-3185-4e06-bea0-6a2f275345e0X",
+        )
+    }
+}

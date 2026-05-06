@@ -1,6 +1,52 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:iolite.datetime////PointingToDeclaration/iolite/iolite.datetime/index.html
+$dokka.location:iolite.datetime/Date.Companion///PointingToDeclaration/iolite/iolite.datetime/-date/-companion/index.html
+$dokka.location:iolite.datetime/Date.Companion/DATE_REGEX_SOURCE/#/PointingToDeclaration/iolite/iolite.datetime/-date/-companion/-d-a-t-e_-r-e-g-e-x_-s-o-u-r-c-e.html
+$dokka.location:iolite.datetime/Date///PointingToDeclaration/iolite/iolite.datetime/-date/index.html
+$dokka.location:iolite.datetime/Date/Date/#kotlin.String/PointingToDeclaration/iolite/iolite.datetime/-date/-date.html
+$dokka.location:iolite.datetime/Date/parse/#/PointingToDeclaration/iolite/iolite.datetime/-date/parse.html
+$dokka.location:iolite.datetime/DateTime///PointingToDeclaration/iolite/iolite.datetime/-date-time/index.html
+$dokka.location:iolite.datetime/DateTime/DateTime/#kotlin.String#kotlin.Int?#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/iolite/iolite.datetime/-date-time/-date-time.html
+$dokka.location:iolite.datetime/DateTime/parse/#/PointingToDeclaration/iolite/iolite.datetime/-date-time/parse.html
+$dokka.location:iolite.datetime/Time.Companion///PointingToDeclaration/iolite/iolite.datetime/-time/-companion/index.html
+$dokka.location:iolite.datetime/Time.Companion/timeRegexSource/#kotlin.Int?/PointingToDeclaration/iolite/iolite.datetime/-time/-companion/time-regex-source.html
+$dokka.location:iolite.datetime/Time///PointingToDeclaration/iolite/iolite.datetime/-time/index.html
+$dokka.location:iolite.datetime/Time/Time/#kotlin.String#kotlin.Int?/PointingToDeclaration/iolite/iolite.datetime/-time/-time.html
+$dokka.location:iolite.datetime/Time/parse/#/PointingToDeclaration/iolite/iolite.datetime/-time/parse.html
+$dokka.location:iolite.encoding////PointingToDeclaration/iolite/iolite.encoding/index.html
+$dokka.location:iolite.encoding/Base64///PointingToDeclaration/iolite/iolite.encoding/-base64/index.html
+$dokka.location:iolite.encoding/Base64/Base64/#kotlin.String/PointingToDeclaration/iolite/iolite.encoding/-base64/-base64.html
+$dokka.location:iolite.encoding/Base64/parse/#/PointingToDeclaration/iolite/iolite.encoding/-base64/parse.html
+$dokka.location:iolite.id////PointingToDeclaration/iolite/iolite.id/index.html
+$dokka.location:iolite.id/Uuid///PointingToDeclaration/iolite/iolite.id/-uuid/index.html
+$dokka.location:iolite.id/Uuid/Uuid/#kotlin.String/PointingToDeclaration/iolite/iolite.id/-uuid/-uuid.html
+$dokka.location:iolite.id/Uuid/parse/#/PointingToDeclaration/iolite/iolite.id/-uuid/parse.html
 $dokka.location:iolite.network////PointingToDeclaration/iolite/iolite.network/index.html
+$dokka.location:iolite.network/Cidr.Companion///PointingToDeclaration/iolite/iolite.network/-cidr/-companion/index.html
+$dokka.location:iolite.network/Cidr///PointingToDeclaration/iolite/iolite.network/-cidr/index.html
+$dokka.location:iolite.network/Cidr/Cidr/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-cidr/-cidr.html
+$dokka.location:iolite.network/Cidr/isV4/#/PointingToDeclaration/iolite/iolite.network/-cidr/is-v4.html
+$dokka.location:iolite.network/Cidr/isV6/#/PointingToDeclaration/iolite/iolite.network/-cidr/is-v6.html
+$dokka.location:iolite.network/Cidr/parse/#/PointingToDeclaration/iolite/iolite.network/-cidr/parse.html
+$dokka.location:iolite.network/Domain///PointingToDeclaration/iolite/iolite.network/-domain/index.html
+$dokka.location:iolite.network/Domain/Domain/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-domain/-domain.html
+$dokka.location:iolite.network/Domain/parse/#/PointingToDeclaration/iolite/iolite.network/-domain/parse.html
+$dokka.location:iolite.network/HostName///PointingToDeclaration/iolite/iolite.network/-host-name/index.html
+$dokka.location:iolite.network/HostName/HostName/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-host-name/-host-name.html
+$dokka.location:iolite.network/HostName/parse/#/PointingToDeclaration/iolite/iolite.network/-host-name/parse.html
+$dokka.location:iolite.network/IpV4.Companion///PointingToDeclaration/iolite/iolite.network/-ip-v4/-companion/index.html
+$dokka.location:iolite.network/IpV4///PointingToDeclaration/iolite/iolite.network/-ip-v4/index.html
+$dokka.location:iolite.network/IpV4/IpV4/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-ip-v4/-ip-v4.html
+$dokka.location:iolite.network/IpV4/parse/#/PointingToDeclaration/iolite/iolite.network/-ip-v4/parse.html
+$dokka.location:iolite.network/IpV6.Companion///PointingToDeclaration/iolite/iolite.network/-ip-v6/-companion/index.html
+$dokka.location:iolite.network/IpV6///PointingToDeclaration/iolite/iolite.network/-ip-v6/index.html
+$dokka.location:iolite.network/IpV6/IpV6/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-ip-v6/-ip-v6.html
+$dokka.location:iolite.network/IpV6/parse/#/PointingToDeclaration/iolite/iolite.network/-ip-v6/parse.html
+$dokka.location:iolite.network/MacAddress.Companion///PointingToDeclaration/iolite/iolite.network/-mac-address/-companion/index.html
+$dokka.location:iolite.network/MacAddress///PointingToDeclaration/iolite/iolite.network/-mac-address/index.html
+$dokka.location:iolite.network/MacAddress/MacAddress/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-mac-address/-mac-address.html
+$dokka.location:iolite.network/MacAddress/parse/#/PointingToDeclaration/iolite/iolite.network/-mac-address/parse.html
 $dokka.location:iolite.network/Url.Companion///PointingToDeclaration/iolite/iolite.network/-url/-companion/index.html
 $dokka.location:iolite.network/Url///PointingToDeclaration/iolite/iolite.network/-url/index.html
 $dokka.location:iolite.network/Url/Url/#kotlin.String/PointingToDeclaration/iolite/iolite.network/-url/-url.html
@@ -12,9 +58,20 @@ $dokka.location:iolite.personal/Age.Companion/MIN_AGE/#/PointingToDeclaration/i
 $dokka.location:iolite.personal/Age///PointingToDeclaration/iolite/iolite.personal/-age/index.html
 $dokka.location:iolite.personal/Age/Age/#kotlin.Int/PointingToDeclaration/iolite/iolite.personal/-age/-age.html
 $dokka.location:iolite.personal/Age/parse/#/PointingToDeclaration/iolite/iolite.personal/-age/parse.html
+$dokka.location:iolite.personal/CreditCardNumber.Companion///PointingToDeclaration/iolite/iolite.personal/-credit-card-number/-companion/index.html
+$dokka.location:iolite.personal/CreditCardNumber///PointingToDeclaration/iolite/iolite.personal/-credit-card-number/index.html
+$dokka.location:iolite.personal/CreditCardNumber/CreditCardNumber/#kotlin.String/PointingToDeclaration/iolite/iolite.personal/-credit-card-number/-credit-card-number.html
+$dokka.location:iolite.personal/CreditCardNumber/parse/#/PointingToDeclaration/iolite/iolite.personal/-credit-card-number/parse.html
 $dokka.location:iolite.personal/Email///PointingToDeclaration/iolite/iolite.personal/-email/index.html
 $dokka.location:iolite.personal/Email/Email/#kotlin.String/PointingToDeclaration/iolite/iolite.personal/-email/-email.html
 $dokka.location:iolite.personal/Email/parse/#/PointingToDeclaration/iolite/iolite.personal/-email/parse.html
+$dokka.location:iolite.personal/JpPhoneNumber.Companion///PointingToDeclaration/iolite/iolite.personal/-jp-phone-number/-companion/index.html
+$dokka.location:iolite.personal/JpPhoneNumber///PointingToDeclaration/iolite/iolite.personal/-jp-phone-number/index.html
+$dokka.location:iolite.personal/JpPhoneNumber/JpPhoneNumber/#kotlin.String/PointingToDeclaration/iolite/iolite.personal/-jp-phone-number/-jp-phone-number.html
+$dokka.location:iolite.personal/JpPhoneNumber/parse/#/PointingToDeclaration/iolite/iolite.personal/-jp-phone-number/parse.html
+$dokka.location:iolite.personal/JpPostalCode///PointingToDeclaration/iolite/iolite.personal/-jp-postal-code/index.html
+$dokka.location:iolite.personal/JpPostalCode/JpPostalCode/#kotlin.String/PointingToDeclaration/iolite/iolite.personal/-jp-postal-code/-jp-postal-code.html
+$dokka.location:iolite.personal/JpPostalCode/parse/#/PointingToDeclaration/iolite/iolite.personal/-jp-postal-code/parse.html
 $dokka.location:iolite.strings////PointingToDeclaration/iolite/iolite.strings/index.html
 $dokka.location:iolite.strings/AlphaNumericString///PointingToDeclaration/iolite/iolite.strings/-alpha-numeric-string/index.html
 $dokka.location:iolite.strings/AlphaNumericString/AlphaNumericString/#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-alpha-numeric-string/-alpha-numeric-string.html
@@ -27,17 +84,22 @@ $dokka.location:iolite.strings/IntegerString/IntegerString/#kotlin.String/Pointi
 $dokka.location:iolite.strings/IntegerString/parse/#/PointingToDeclaration/iolite/iolite.strings/-integer-string/parse.html
 $dokka.location:iolite.strings/StringValueObject///PointingToDeclaration/iolite/iolite.strings/-string-value-object/index.html
 $dokka.location:iolite.strings/StringValueObject/StringValueObject/#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-string-value-object/-string-value-object.html
+$dokka.location:iolite.strings/StringValueObject/customerValidation/#kotlin.Function1[kotlin.String,kotlin.Boolean]#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-string-value-object/customer-validation.html
 $dokka.location:iolite.strings/StringValueObject/endWith/#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-string-value-object/end-with.html
 $dokka.location:iolite.strings/StringValueObject/max/#kotlin.Int/PointingToDeclaration/iolite/iolite.strings/-string-value-object/max.html
 $dokka.location:iolite.strings/StringValueObject/min/#kotlin.Int/PointingToDeclaration/iolite/iolite.strings/-string-value-object/min.html
 $dokka.location:iolite.strings/StringValueObject/notEmpty/#/PointingToDeclaration/iolite/iolite.strings/-string-value-object/not-empty.html
 $dokka.location:iolite.strings/StringValueObject/parse/#/PointingToDeclaration/iolite/iolite.strings/-string-value-object/parse.html
+$dokka.location:iolite.strings/StringValueObject/regex/#[Error type: Unresolved type for Regex]/PointingToDeclaration/iolite/iolite.strings/-string-value-object/regex.html
 $dokka.location:iolite.strings/StringValueObject/startWith/#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-string-value-object/start-with.html
 $dokka.location:iolite////PointingToDeclaration/iolite/iolite/index.html
 $dokka.location:iolite/ValueObject///PointingToDeclaration/iolite/iolite/-value-object/index.html
 $dokka.location:iolite/ValueObject/parse/#/PointingToDeclaration/iolite/iolite/-value-object/parse.html
 $dokka.location:iolite/ValueObject/safeParse/#/PointingToDeclaration/iolite/iolite/-value-object/safe-parse.html
 iolite
+iolite.datetime
+iolite.encoding
+iolite.id
 iolite.network
 iolite.personal
 iolite.strings
