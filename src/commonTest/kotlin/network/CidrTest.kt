@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.Cidr
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,7 +19,7 @@ class CidrTest {
     @Test
     fun invalidCIDRsShouldThrowExceptions() {
         for (input in invalidCidrs) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 Cidr(input).parse()
             }
         }
@@ -38,7 +39,7 @@ class CidrTest {
         for (input in invalidCidrs) {
             val result = Cidr(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

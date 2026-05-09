@@ -1,14 +1,18 @@
 package iolite.datetime
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Date(private val value: String) : ValueObject<String> {
     override fun parse(): String {
         val normalized = value.trim()
-        require(
-            dateRegex.matches(normalized)
+        ioliteRequire(
+            target = IoliteException.Target.Date,
+            rule = IoliteException.Rule.Format,
+            condition = dateRegex.matches(normalized),
         ) {
             "Invalid date format: $value"
         }

@@ -1,6 +1,8 @@
 package iolite.network
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -8,7 +10,11 @@ value class IpV6(private val value: String) : ValueObject<String> {
 
     override fun parse(): String {
         val normalized = value.trim()
-        require(ipv6Regex.matches(normalized)) {
+        ioliteRequire(
+            target = IoliteException.Target.IpV6,
+            rule = IoliteException.Rule.Format,
+            condition = ipv6Regex.matches(normalized),
+        ) {
             "Invalid IPv6 Address: $value"
         }
         return normalized

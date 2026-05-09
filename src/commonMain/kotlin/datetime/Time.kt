@@ -1,14 +1,16 @@
 package iolite.datetime
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 
 class Time(private val value: String, private val precision: Int? = null) : ValueObject<String> {
     override fun parse(): String {
         val normalized = value.trim()
-        require(
-            Regex(
-                "^${timeRegexSource(precision)}\$"
-            ).matches(normalized)
+        ioliteRequire(
+            target = IoliteException.Target.Time,
+            rule = IoliteException.Rule.Format,
+            condition = Regex("^${timeRegexSource(precision)}\$").matches(normalized),
         ) {
             "Invalid time format: $value"
         }

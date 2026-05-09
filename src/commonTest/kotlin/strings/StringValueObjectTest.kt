@@ -1,5 +1,6 @@
 package strings
 
+import iolite.IoliteException
 import iolite.strings.StringValueObject
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,16 +17,18 @@ class StringValueObjectTest {
     @Test
     fun notEmptyShouldThrowExceptionForEmptyString() {
         val valueObject = StringValueObject("")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.notEmpty()
         }
         assertEquals("String value cannot be empty", exception.message)
+        assertEquals(IoliteException.Target.StringValueObject, exception.target)
+        assertEquals(IoliteException.Rule.NotEmpty, exception.rule)
     }
 
     @Test
     fun minLengthShouldThrowExceptionForStringShorterThanMinimumLength() {
         val valueObject = StringValueObject("short")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.min(10).parse()
         }
         assertEquals("Value short is less than minimum threshold 10", exception.message)
@@ -34,7 +37,7 @@ class StringValueObjectTest {
     @Test
     fun maxLengthShouldThrowExceptionForStringLongerThanMaximumLength() {
         val valueObject = StringValueObject("this is a very long string")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.max(10).parse()
         }
         assertEquals("Value this is a very long string is greater than maximum threshold 10", exception.message)
@@ -43,7 +46,7 @@ class StringValueObjectTest {
     @Test
     fun startWithShouldThrowExceptionForStringNotStartingWithSpecifiedPrefix() {
         val valueObject = StringValueObject("exampleString")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.startWith("test").parse()
         }
         assertEquals("Value exampleString does not start with test", exception.message)
@@ -52,7 +55,7 @@ class StringValueObjectTest {
     @Test
     fun endWithShouldThrowExceptionForStringNotEndingWithSpecifiedSuffix() {
         val valueObject = StringValueObject("exampleString")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.endWith("test").parse()
         }
         assertEquals("Value exampleString does not end with test", exception.message)
@@ -61,7 +64,7 @@ class StringValueObjectTest {
     @Test
     fun regexShouldThrowExceptionForStringNotMatchingRegexPattern() {
         val valueObject = StringValueObject("example123")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.regex(Regex("^[a-z]+$")).parse()
         }
         assertEquals("Value example123 does not match regex pattern ^[a-z]+$", exception.message)
@@ -70,7 +73,7 @@ class StringValueObjectTest {
     @Test
     fun customerValidationShouldThrowExceptionForInvalidCustomValidation() {
         val valueObject = StringValueObject("invalid")
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             valueObject.customerValidation(
                 validation = { it.length > 10 },
                 errorMessage = "Custom validation failed"

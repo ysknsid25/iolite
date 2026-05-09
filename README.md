@@ -77,7 +77,7 @@ Parse validates the input value provided and raises an exception if it is invali
 ```
 try {
   val email: String = Email("youremail@example.com").parse()
-}catch (e: IllegalArgumentException) {
+}catch (e: IoliteException) {
   // Handle the exception if needed
 }
 ```
@@ -92,6 +92,30 @@ if(email.isFailure){
   // Handle the exception if needed
 }
 println(email.getOrNull()) // print "youremail@example.com"
+```
+
+## Exception handling
+
+iolite follows the [Kotlin API guidelines for debuggability](https://kotlinlang.org/docs/api-guidelines-debuggability.html) and throws a single library-specific exception type for every validation failure.
+
+- Every `parse()` call raises **`iolite.IoliteException`** (and only that type) when validation fails.
+- `safeParse()` catches **only** `IoliteException` and converts it into `Result.failure`. Any other exception thrown from inside `parse()` (e.g. a bug in a custom validation lambda) is intentionally **not** swallowed, so genuine bugs are not hidden as validation failures.
+- `IoliteException` extends `IllegalArgumentException` for source compatibility — existing `catch (e: IllegalArgumentException)` blocks keep working — but new code SHOULD catch `IoliteException` to distinguish iolite validation failures from other argument errors.
+- Each exception carries structured fields so failures can be inspected without parsing message strings:
+  - `target: IoliteException.Target` — which Value Object failed (e.g. `Email`, `CreditCardNumber`).
+  - `rule: IoliteException.Rule` — which rule was violated (e.g. `Format`, `Range`, `Luhn`).
+
+```kotlin
+import iolite.IoliteException
+import iolite.personal.Email
+
+val result = Email("not-an-email").safeParse()
+result.exceptionOrNull()?.let { e ->
+    if (e is IoliteException) {
+        println("validation failed: target=${e.target} rule=${e.rule}")
+        // -> validation failed: target=Email rule=Format
+    }
+}
 ```
 
 ## StringValueObject

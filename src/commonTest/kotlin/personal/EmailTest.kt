@@ -1,5 +1,6 @@
 package personal
 
+import iolite.IoliteException
 import iolite.personal.Email
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -22,9 +23,16 @@ class EmailTest {
     @Test
     fun shouldThrowIllegalArgumentExceptionForInvalidEmail() {
         for (invalidEmail in invalidEmails) {
-            val exception = assertFailsWith<IllegalArgumentException> { Email(invalidEmail).parse() }
+            val exception = assertFailsWith<IoliteException> { Email(invalidEmail).parse() }
             assertEquals("Invalid email address: $invalidEmail", exception.message)
         }
+    }
+
+    @Test
+    fun shouldExposeTargetAndRuleOnInvalidEmail() {
+        val exception = assertFailsWith<IoliteException> { Email("not-an-email").parse() }
+        assertEquals(IoliteException.Target.Email, exception.target)
+        assertEquals(IoliteException.Rule.Format, exception.rule)
     }
 
     @Test
@@ -41,7 +49,7 @@ class EmailTest {
         for (invalidEmail in invalidEmails) {
             val result = Email(invalidEmail).safeParse()
             assertTrue(result.isFailure, "Expected failure for invalidEmail='$invalidEmail'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

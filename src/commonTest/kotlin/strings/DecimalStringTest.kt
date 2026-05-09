@@ -1,5 +1,6 @@
 package strings
 
+import iolite.IoliteException
 import iolite.strings.DecimalString
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class DecimalStringTest {
     @Test
     fun parseShouldThrowExceptionForInvalidDecimalStrings() {
         for (input in invalidDecimalStrings) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DecimalString(input).parse()
             }
         }
@@ -37,7 +38,7 @@ class DecimalStringTest {
         for (input in invalidDecimalStrings) {
             val result = DecimalString(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

@@ -1,6 +1,8 @@
 package iolite.network
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -8,7 +10,11 @@ value class Cidr(private val value: String) : ValueObject<String> {
 
     override fun parse(): String {
         val normalized = value.trim()
-        require(cidrRegexV4.matches(normalized) || cidrRegexV6.matches(normalized)) {
+        ioliteRequire(
+            target = IoliteException.Target.Cidr,
+            rule = IoliteException.Rule.Format,
+            condition = cidrRegexV4.matches(normalized) || cidrRegexV6.matches(normalized),
+        ) {
             "Invalid CIDR notation: $value"
         }
         return normalized

@@ -1,5 +1,6 @@
 package personal
 
+import iolite.IoliteException
 import iolite.personal.JpPostalCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,7 +22,7 @@ class JpPostalCodeTest {
     @Test
     fun invalidJapanesePostalCodeShouldThrowExceptions() {
         for (jpPostalCode in invalidJpPostalCodes) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for jpPostalCode='$jpPostalCode'") {
+            assertFailsWith<IoliteException>("Expected fail for jpPostalCode='$jpPostalCode'") {
                 JpPostalCode(jpPostalCode).parse()
             }
         }
@@ -41,7 +42,7 @@ class JpPostalCodeTest {
         for (jpPostalCode in invalidJpPostalCodes) {
             val result = JpPostalCode(jpPostalCode).safeParse()
             assertTrue(result.isFailure, "Expected failure for jpPostalCode='$jpPostalCode'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

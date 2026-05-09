@@ -1,5 +1,6 @@
 package datetime
 
+import iolite.IoliteException
 import iolite.datetime.DateTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimesShouldThrowExceptions() {
         for (input in invalidDateTimes) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input).parse()
             }
         }
@@ -33,7 +34,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimesNomsShouldThrowExceptions() {
         for (input in invalidDateTimesNoMS) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input, 0).parse()
             }
         }
@@ -49,7 +50,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimes3msShouldThrowExceptions() {
         for (input in invalidDateTimes3Ms) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input, 3).parse()
             }
         }
@@ -65,7 +66,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimesWithOffsetShouldThrowExceptions() {
         for (input in invalidDateTimesOffset) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input, offset = true).parse()
             }
         }
@@ -81,7 +82,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimesWithOffsetAndNoMsShouldThrowExceptions() {
         for (input in invalidDateTimesOffsetNoMS) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input, 0, offset = true).parse()
             }
         }
@@ -97,7 +98,7 @@ class DateTimeTest {
     @Test
     fun invalidDatetimesWithOffsetAnd4msShouldThrowExceptions() {
         for (input in invalidDateTimesOffset4Ms) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 DateTime(input, 4, offset = true).parse()
             }
         }

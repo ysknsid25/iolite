@@ -1,5 +1,6 @@
 package personal
 
+import iolite.IoliteException
 import iolite.personal.CreditCardNumber
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class CreditCardNumberTest {
     @Test
     fun invalidCardNumbersShouldThrowExceptions() {
         for (cardNumber in invalidCardNumbers) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for cardNumber='$cardNumber'") {
+            assertFailsWith<IoliteException>("Expected fail for cardNumber='$cardNumber'") {
                 CreditCardNumber(cardNumber).parse()
             }
         }
@@ -37,7 +38,7 @@ class CreditCardNumberTest {
         for (cardNumber in invalidCardNumbers) {
             val result = CreditCardNumber(cardNumber).safeParse()
             assertTrue(result.isFailure, "Expected failure for cardNumber='$cardNumber'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

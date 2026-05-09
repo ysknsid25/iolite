@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.HostName
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -19,7 +20,7 @@ class HostNameTest {
     fun parseShouldThrowExceptionForInvalidHostnames() {
         for (input in invalidHostNames) {
             val hostName = HostName(input)
-            val exception = assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            val exception = assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 hostName.parse()
             }
             assertTrue(

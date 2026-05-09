@@ -1,5 +1,6 @@
 package strings
 
+import iolite.IoliteException
 import iolite.strings.AlphaNumericString
 import iolite.strings.StringValueObject
 import kotlin.test.Test
@@ -19,7 +20,7 @@ class AlphaNumericStringTest {
     @Test
     fun invalidAlphaNumericStringInputsShouldThrowExceptionsOnParse() {
         for (input in invalidAlphaNumericInputs) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 AlphaNumericString(input).parse()
             }
         }
@@ -39,7 +40,7 @@ class AlphaNumericStringTest {
         for (input in invalidAlphaNumericInputs) {
             val result: Result<StringValueObject> = runCatching { AlphaNumericString(input).parse() }
             assertTrue(result.isFailure, "Expected failure for input='$input'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 
