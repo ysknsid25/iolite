@@ -1,0 +1,41 @@
+{
+    "name": "iolite (Kotlin Multiplatform)",
+    "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "mounts": [
+        "source=iolite-gradle-cache,target=/home/vscode/.gradle,type=volume",
+        "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.claude.json,target=/home/vscode/.claude.json,type=bind,consistency=cached"
+    ],
+    "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.gradle",
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "postStartCommand": "sudo chown -R vscode:vscode /home/vscode/.gradle",
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "fwcd.kotlin",
+                "vscjava.vscode-gradle",
+                "redhat.java",
+                "vscjava.vscode-java-debug",
+                "vscjava.vscode-java-test",
+                "redhat.vscode-yaml",
+                "EditorConfig.EditorConfig",
+                "anthropic.claude-code"
+            ],
+            "settings": {
+                "java.configuration.updateBuildConfiguration": "automatic",
+                "java.import.gradle.wrapper.enabled": true,
+                "files.eol": "\n",
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "[kotlin]": {
+                    "editor.tabSize": 4,
+                    "editor.insertSpaces": true
+                }
+            }
+        }
+    }
+}

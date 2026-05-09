@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p src/commonMain)",
+      "Bash(git mv *)",
+      "Bash(rmdir src/main)",
+      "Bash(./gradlew --version)",
+      "Bash(./gradlew detekt *)",
+      "Bash(git push *)",
+      "Bash(git tag *)",
+      "Bash(./gradlew --stop)",
+      "Bash(rm -rf ~/.gradle/caches/jars-9 ~/.gradle/caches/modules-2/metadata-2.*)",
+      "Bash(./gradlew help *)",
+      "Bash(curl -s \"https://repo.maven.apache.org/maven2/com/vanniktech/gradle-maven-publish-plugin/maven-metadata.xml\")",
+      "Bash(curl -s \"https://repo.maven.apache.org/maven2/io/github/ysknsid25/iolite/iolite/beta-v3/\")",
+      "Bash(curl -s \"https://repo.maven.apache.org/maven2/io/github/ysknsid25/iolite/iolite/beta-v3/iolite-beta-v3.pom\")",
+      "Bash(curl -s \"https://repo.maven.apache.org/maven2/io/github/ysknsid25/iolite/iolite/beta-v3/iolite-beta-v3-kotlin-tooling-metadata.json\")",
+      "Bash(curl -sI \"https://repo.maven.apache.org/maven2/io/github/ysknsid25/iolite/iolite-jvm/beta-v3/iolite-jvm-beta-v3.jar\")",
+      "Bash(curl -s \"https://repo.maven.apache.org/maven2/io/github/ysknsid25/iolite/iolite/beta-v3/iolite-beta-v3.module\")",
+      "Bash(python3 -c \"import json,sys; m=json.load\\(sys.stdin\\); print\\('variants:'\\); [print\\(' -', v['name'], '|', v['attributes'].get\\('org.jetbrains.kotlin.platform.type', '?'\\)\\) for v in m['variants']]\")",
+      "Bash(./gradlew -p sample dependencies --configuration runtimeClasspath)"
+    ]
+  }
+}

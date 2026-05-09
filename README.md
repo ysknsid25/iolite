@@ -135,6 +135,98 @@ implementation("io.github.ysknsid25.iolite:iolite:{version}")
 
 refer [here](https://mvnrepository.com/artifact/io.github.ysknsid25.iolite/iolite)
 
+# 🛠 Development
+
+You can use either IntelliJ IDEA (the project's primary IDE) or VSCode with a Dev Container.
+
+## VSCode Dev Container
+
+Prerequisites:
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Docker Engine on Linux)
+- [VSCode](https://code.visualstudio.com/) with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+
+Steps:
+
+1. Clone the repository and open the folder in VSCode.
+2. When prompted, choose **"Reopen in Container"** (or run the `Dev Containers: Reopen in Container` command).
+3. The container builds automatically. On first start it installs Claude Code, configures the git hooks, and warms up the Gradle cache.
+4. From a container terminal, you can run the same tasks CI runs:
+
+   ```bash
+   ./gradlew detekt         # static analysis
+   ./gradlew allTests       # common + JVM tests
+   ./gradlew koverXmlReport # coverage report
+   ```
+
+What the container provides:
+
+- Temurin JDK 17 (LTS) with Gradle wrapper-driven builds
+- Pre-configured VSCode extensions: Kotlin (`fwcd.kotlin`), Gradle, Java test runners, YAML, EditorConfig, and Claude Code
+- Claude Code CLI installed via the official `curl -fsSL https://claude.ai/install.sh | bash` script. Your host `~/.claude` and `~/.claude.json` are bind-mounted into the container so credentials, settings, and history are shared with your host setup.
+- Auto-configured `pre-commit` git hook (`.githooks/pre-commit` activated via `core.hooksPath`)
+
+## IntelliJ IDEA
+
+Open the project folder in IntelliJ — Gradle import runs automatically. After import, enable the pre-commit hook:
+
+```bash
+chmod +x .githooks/pre-commit
+git config core.hooksPath .githooks
+```
+
+## Common Gradle tasks
+
+All tasks are run via the bundled Gradle wrapper (`./gradlew`) regardless of whether you use IntelliJ or a Dev Container.
+
+### Build
+
+```bash
+./gradlew build              # full build (compile + test + check)
+./gradlew clean              # remove build artifacts
+./gradlew assemble           # compile only, skip tests
+```
+
+### Test
+
+```bash
+./gradlew allTests           # run all KMP tests (commonTest + jvmTest)
+./gradlew jvmTest            # run JVM tests only (JUnit 5 + Konsist)
+./gradlew check              # run all verification tasks (test + detekt)
+```
+
+### Static analysis (Detekt)
+
+```bash
+./gradlew detekt             # run Detekt with auto-correct enabled
+                             # report: reports/detekt.html
+```
+
+Detekt configuration: `config/detekt/detekt.yml`.
+
+### Coverage (Kover)
+
+```bash
+./gradlew koverHtmlReport    # generate HTML coverage report
+                             # report: build/reports/kover/html/index.html
+./gradlew koverXmlReport     # generate XML coverage report (used by CI)
+                             # report: build/reports/kover/report.xml
+./gradlew koverVerify        # fail the build if coverage is below the threshold
+```
+
+### Documentation (Dokka)
+
+```bash
+./gradlew dokkaHtml          # generate API docs into docs/
+```
+
+### Discovering tasks
+
+```bash
+./gradlew tasks              # list all available tasks
+./gradlew help --task <name> # show details for a specific task
+```
+
 # ✨ Star History ✨
 
 [![Star History Chart](https://api.star-history.com/svg?repos=ysknsid25/iolite&type=Date)](https://star-history.com/#bytebase/star-history&Date)
