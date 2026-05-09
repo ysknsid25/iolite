@@ -28,6 +28,7 @@ kotlin {
         browser()
         nodejs()
     }
+    linuxX64()
 
     sourceSets {
         val commonMain by getting

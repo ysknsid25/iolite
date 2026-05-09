@@ -16,6 +16,7 @@ iolite is published as a Kotlin Multiplatform library and runs on:
 
 - JVM (Java 1.8+)
 - Kotlin/JS (IR, browser & Node.js)
+- Kotlin/Native — Linux x64
 
 # ⚙ Features
 
