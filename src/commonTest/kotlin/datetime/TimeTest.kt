@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class TimeTest {
     @Test
-    fun `valid times should parse successfully`() {
+    fun validTimesShouldParseSuccessfully() {
         for (time in validTimes) {
             assertEquals(time, Time(time).parse(), "Failed for time='$time'")
         }
     }
 
     @Test
-    fun `invalid times should throw exceptions`() {
+    fun invalidTimesShouldThrowExceptions() {
         for (time in invalidTimes) {
             assertFailsWith<IllegalArgumentException>("Expected fail for time='$time'") {
                 Time(time).parse()
@@ -24,7 +24,7 @@ class TimeTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (time in validTimes) {
             val result = Time(time).safeParse()
             assertTrue(result.isSuccess, "Expected success for time='$time'")
@@ -33,7 +33,7 @@ class TimeTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (time in invalidTimes) {
             val result = Time(time).safeParse()
             assertTrue(result.isFailure, "Expected failure for time='$time'")
@@ -42,14 +42,14 @@ class TimeTest {
     }
 
     @Test
-    fun `valid times precision2 should parse successfully`() {
+    fun validTimesPrecision2ShouldParseSuccessfully() {
         for (time in validTimesPrecision2) {
             assertEquals(time, Time(time, 2).parse(), "Failed for time='$time'")
         }
     }
 
     @Test
-    fun `invalid times precision2 should throw exceptions`() {
+    fun invalidTimesPrecision2ShouldThrowExceptions() {
         for (time in invalidTimesPrecision2) {
             assertFailsWith<IllegalArgumentException>("Expected fail for time='$time'") {
                 Time(time, 2).parse()

@@ -1,6 +1,7 @@
 package iolite.network
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class IpV4(private val value: String) : ValueObject<String> {

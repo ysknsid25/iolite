@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class MacAddressTest {
     @Test
-    fun `valid MAC Addresses should parse successfully`() {
+    fun validMACAddressesShouldParseSuccessfully() {
         for (macAddress in validMacAddresses) {
             assertEquals(macAddress, MacAddress(macAddress).parse(), "Failed for macAddress='$macAddress'")
         }
     }
 
     @Test
-    fun `invalid MAC Addresses should throw exceptions`() {
+    fun invalidMACAddressesShouldThrowExceptions() {
         for (macAddress in invalidMacAddresses) {
             assertFailsWith<IllegalArgumentException>("Expected fail for macAddress='$macAddress'") {
                 MacAddress(macAddress).parse()
@@ -24,7 +24,7 @@ class MacAddressTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (macAddress in validMacAddresses) {
             val result = MacAddress(macAddress).safeParse()
             assertTrue(result.isSuccess, "Expected success for macAddress='$macAddress'")
@@ -33,7 +33,7 @@ class MacAddressTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (macAddress in invalidMacAddresses) {
             val result = MacAddress(macAddress).safeParse()
             assertTrue(result.isFailure, "Expected failure for macAddress='$macAddress'")

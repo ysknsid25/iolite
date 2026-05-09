@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class UuidTest {
     @Test
-    fun `valid UUIDs should parse successfully`() {
+    fun validUUIDsShouldParseSuccessfully() {
         for (input in validUUIDs) {
             assertEquals(input, Uuid(input).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid UUIDs should throw exceptions`() {
+    fun invalidUUIDsShouldThrowExceptions() {
         for (input in invalidUUIDs) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 Uuid(input).parse()
@@ -24,7 +24,7 @@ class UuidTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (input in validUUIDs) {
             val result = Uuid(input).safeParse()
             assertTrue(result.isSuccess, "Expected success for input='$input'")
@@ -33,7 +33,7 @@ class UuidTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (input in invalidUUIDs) {
             val result = Uuid(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")

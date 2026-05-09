@@ -90,7 +90,7 @@ $dokka.location:iolite.strings/StringValueObject/max/#kotlin.Int/PointingToDecla
 $dokka.location:iolite.strings/StringValueObject/min/#kotlin.Int/PointingToDeclaration/iolite/iolite.strings/-string-value-object/min.html
 $dokka.location:iolite.strings/StringValueObject/notEmpty/#/PointingToDeclaration/iolite/iolite.strings/-string-value-object/not-empty.html
 $dokka.location:iolite.strings/StringValueObject/parse/#/PointingToDeclaration/iolite/iolite.strings/-string-value-object/parse.html
-$dokka.location:iolite.strings/StringValueObject/regex/#[Error type: Unresolved type for Regex]/PointingToDeclaration/iolite/iolite.strings/-string-value-object/regex.html
+$dokka.location:iolite.strings/StringValueObject/regex/#kotlin.text.Regex/PointingToDeclaration/iolite/iolite.strings/-string-value-object/regex.html
 $dokka.location:iolite.strings/StringValueObject/startWith/#kotlin.String/PointingToDeclaration/iolite/iolite.strings/-string-value-object/start-with.html
 $dokka.location:iolite////PointingToDeclaration/iolite/iolite/index.html
 $dokka.location:iolite/ValueObject///PointingToDeclaration/iolite/iolite/-value-object/index.html

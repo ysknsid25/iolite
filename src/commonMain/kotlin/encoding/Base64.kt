@@ -1,6 +1,7 @@
 package iolite.encoding
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Base64(private val value: String) : ValueObject<String> {

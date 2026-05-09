@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class Base64Test {
     @Test
-    fun `valid Base64 should parse successfully`() {
+    fun validBase64ShouldParseSuccessfully() {
         for (base64 in validBase64Strings) {
             assertEquals(base64, Base64(base64).parse(), "Failed for base64='$base64'")
         }
     }
 
     @Test
-    fun `invalid Base64 should throw exceptions`() {
+    fun invalidBase64ShouldThrowExceptions() {
         for (base64 in invalidBase64Strings) {
             assertFailsWith<IllegalArgumentException>("Expected fail for base64='$base64'") {
                 Base64(base64).parse()
@@ -24,7 +24,7 @@ class Base64Test {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (base64 in validBase64Strings) {
             val result = Base64(base64).safeParse()
             assertTrue(result.isSuccess, "Expected success for base64='$base64'")
@@ -33,7 +33,7 @@ class Base64Test {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (base64 in invalidBase64Strings) {
             val result = Base64(base64).safeParse()
             assertTrue(result.isFailure, "Expected failure for base64='$base64'")

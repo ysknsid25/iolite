@@ -1,6 +1,7 @@
 package iolite.personal
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Email(private val value: String) : ValueObject<String> {

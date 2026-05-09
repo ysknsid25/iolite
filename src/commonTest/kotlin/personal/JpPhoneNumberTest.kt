@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class JpPhoneNumberTest {
     @Test
-    fun `valid Japanese Phone Number should parse successfully`() {
+    fun validJapanesePhoneNumberShouldParseSuccessfully() {
         for (jpPhoneNumber in validJpPhoneNumber) {
             assertEquals(
                 jpPhoneNumber,
@@ -19,7 +19,7 @@ class JpPhoneNumberTest {
     }
 
     @Test
-    fun `invalid Japanese Phone Number should throw exceptions`() {
+    fun invalidJapanesePhoneNumberShouldThrowExceptions() {
         for (jpPhoneNumber in invalidJpPhoneNumber) {
             assertFailsWith<IllegalArgumentException>("Expected fail for jpPhoneNumber='$jpPhoneNumber'") {
                 JpPhoneNumber(jpPhoneNumber).parse()
@@ -28,7 +28,7 @@ class JpPhoneNumberTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (jpPhoneNumber in validJpPhoneNumber) {
             val result = JpPhoneNumber(jpPhoneNumber).safeParse()
             assertTrue(result.isSuccess, "Expected success for jpPhoneNumber='$jpPhoneNumber'")
@@ -37,7 +37,7 @@ class JpPhoneNumberTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (jpPhoneNumber in invalidJpPhoneNumber) {
             val result = JpPhoneNumber(jpPhoneNumber).safeParse()
             assertTrue(result.isFailure, "Expected failure for jpPhoneNumber='$jpPhoneNumber'")

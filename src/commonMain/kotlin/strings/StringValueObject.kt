@@ -1,6 +1,7 @@
 package iolite.strings
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class StringValueObject(private val value: String) : ValueObject<String> {

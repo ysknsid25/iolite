@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class JpPostalCodeTest {
     @Test
-    fun `valid Japanese Postal Code should parse successfully`() {
+    fun validJapanesePostalCodeShouldParseSuccessfully() {
         for (jpPostalCode in validJpPostalCodes) {
             assertEquals(
                 jpPostalCode,
@@ -19,7 +19,7 @@ class JpPostalCodeTest {
     }
 
     @Test
-    fun `invalid Japanese Postal Code should throw exceptions`() {
+    fun invalidJapanesePostalCodeShouldThrowExceptions() {
         for (jpPostalCode in invalidJpPostalCodes) {
             assertFailsWith<IllegalArgumentException>("Expected fail for jpPostalCode='$jpPostalCode'") {
                 JpPostalCode(jpPostalCode).parse()
@@ -28,7 +28,7 @@ class JpPostalCodeTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (jpPostalCode in validJpPostalCodes) {
             val result = JpPostalCode(jpPostalCode).safeParse()
             assertTrue(result.isSuccess, "Expected success for jpPostalCode='$jpPostalCode'")
@@ -37,7 +37,7 @@ class JpPostalCodeTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (jpPostalCode in invalidJpPostalCodes) {
             val result = JpPostalCode(jpPostalCode).safeParse()
             assertTrue(result.isFailure, "Expected failure for jpPostalCode='$jpPostalCode'")

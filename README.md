@@ -10,6 +10,13 @@
 A Value Object is an object whose equality is determined by the "values ​​of its attributes" rather than the object's "identifier."
 In Domain-Driven Design (DDD), they are used to clearly model concepts and rules.
 
+# 🌐 Supported platforms
+
+iolite is published as a Kotlin Multiplatform library and runs on:
+
+- JVM (Java 1.8+)
+- Kotlin/JS (IR, browser & Node.js)
+
 # ⚙ Features
 
 view [iolite API](https://ysknsid25.github.io/iolite/)
@@ -129,8 +136,22 @@ this is same logic of [Valibot](https://github.com/fabian-hiller/valibot/blob/54
 
 # Installation
 
-```
+## Pure JVM / Android / Server-side Kotlin
+
+```kotlin
 implementation("io.github.ysknsid25.iolite:iolite:{version}")
+```
+
+## Kotlin Multiplatform
+
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("io.github.ysknsid25.iolite:iolite:{version}")
+        }
+    }
+}
 ```
 
 refer [here](https://mvnrepository.com/artifact/io.github.ysknsid25.iolite/iolite)

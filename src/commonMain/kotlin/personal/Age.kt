@@ -1,6 +1,7 @@
 package iolite.personal
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 @JvmInline
 value class Age(private val value: Int) : ValueObject<Int> {

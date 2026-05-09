@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class IntegerStringTest {
     @Test
-    fun `valid IntegerCharacter inputs should create successfully`() {
+    fun validIntegerCharacterInputsShouldCreateSuccessfully() {
         for (input in validIntegerInputs) {
             val integerString = IntegerString(input)
             assertEquals(input, integerString.parse().parse(), "Failed for input='$input'")
@@ -16,7 +16,7 @@ class IntegerStringTest {
     }
 
     @Test
-    fun `invalid IntegerCharacter inputs should throw exceptions`() {
+    fun invalidIntegerCharacterInputsShouldThrowExceptions() {
         for (input in invalidIntegerInputs) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 IntegerString(input).parse()
@@ -25,7 +25,7 @@ class IntegerStringTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (input in validIntegerInputs) {
             val result = IntegerString(input).safeParse()
             assertTrue(result.isSuccess, "Expected success for input='$input'")
@@ -34,7 +34,7 @@ class IntegerStringTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (input in invalidIntegerInputs) {
             val result = IntegerString(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")

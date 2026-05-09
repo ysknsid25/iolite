@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class DecimalStringTest {
     @Test
-    fun `parse should succeed for valid decimal strings`() {
+    fun parseShouldSucceedForValidDecimalStrings() {
         for (input in validDecimalStrings) {
             assertEquals(input, DecimalString(input).parse().parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `parse should throw exception for invalid decimal strings`() {
+    fun parseShouldThrowExceptionForInvalidDecimalStrings() {
         for (input in invalidDecimalStrings) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DecimalString(input).parse()
@@ -24,7 +24,7 @@ class DecimalStringTest {
     }
 
     @Test
-    fun `safeParse should return value for valid decimal strings`() {
+    fun safeParseShouldReturnValueForValidDecimalStrings() {
         for (input in validDecimalStrings) {
             val result = DecimalString(input).safeParse()
             assertTrue(result.isSuccess, "Expected success for input='$input'")
@@ -33,7 +33,7 @@ class DecimalStringTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (input in invalidDecimalStrings) {
             val result = DecimalString(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")

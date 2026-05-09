@@ -10,7 +10,7 @@ import kotlin.test.assertTrue
 class AgeTest {
 
     @Test
-    fun `parse should throw exception for values below MIN_AGE`() {
+    fun parseShouldThrowExceptionForValuesBelowMINAGE() {
         val invalidAge = Age(Age.MIN_AGE - 1)
         val exception = assertFailsWith<IllegalArgumentException> {
             invalidAge.parse()
@@ -22,7 +22,7 @@ class AgeTest {
     }
 
     @Test
-    fun `parse should throw exception for values above MAX_AGE`() {
+    fun parseShouldThrowExceptionForValuesAboveMAXAGE() {
         val invalidAge = Age(Age.MAX_AGE + 1)
         val exception = assertFailsWith<IllegalArgumentException> {
             invalidAge.parse()
@@ -34,7 +34,7 @@ class AgeTest {
     }
 
     @Test
-    fun `parse should return value for valid age within range`() {
+    fun parseShouldReturnValueForValidAgeWithinRange() {
         val validAge = Age(Age.MIN_AGE)
         assertEquals(Age.MIN_AGE, validAge.parse())
 
@@ -46,28 +46,28 @@ class AgeTest {
     }
 
     @Test
-    fun `parse should work with IntegerCharacter converted to Age`() {
+    fun parseShouldWorkWithIntegerCharacterConvertedToAge() {
         val validIntegerString = IntegerString("25")
         val age = Age(validIntegerString.parse().parse().toInt())
         assertEquals(25, age.parse())
     }
 
     @Test
-    fun `safeParse should return failure for invalidAgeBelow`() {
+    fun safeParseShouldReturnFailureForInvalidAgeBelow() {
         val result = Age(Age.MIN_AGE - 1).safeParse()
         assertTrue(result.isFailure)
         assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
     }
 
     @Test
-    fun `safeParse should return failure for invalidAgeAbove`() {
+    fun safeParseShouldReturnFailureForInvalidAgeAbove() {
         val result = Age(Age.MAX_AGE + 1).safeParse()
         assertTrue(result.isFailure)
         assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
     }
 
     @Test
-    fun `safeParse should return value for valid age within range`() {
+    fun safeParseShouldReturnValueForValidAgeWithinRange() {
         val validAgeMiddle = Age((Age.MIN_AGE + Age.MAX_AGE) / 2)
         val result = validAgeMiddle.safeParse()
         assertTrue(result.isSuccess)
