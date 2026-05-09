@@ -23,7 +23,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class DecimalString(private val value: String) : ValueObject<StringValueObject> {
+public value class DecimalString(private val value: String) : ValueObject<StringValueObject> {
 
     /**
      * Validates the wrapped value as a decimal string and wraps it for further chaining.

@@ -29,7 +29,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc4291">RFC 4291 — IPv6 Addressing Architecture</a>
  */
 @JvmInline
-value class IpV6(private val value: String) : ValueObject<String> {
+public value class IpV6(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped IPv6 address and returns the trimmed form.
@@ -57,7 +57,7 @@ value class IpV6(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "IpV6($value)"
 
-    companion object {
+    private companion object {
         private fun ipv4Part(): String {
             val byte = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)"
             return "($byte\\.){3}$byte"

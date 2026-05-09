@@ -34,6 +34,8 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Run detekt
         run: ./gradlew detekt
+      - name: Check binary compatibility
+        run: ./gradlew apiCheck -PdisableKlibApi=true
       - name: Run unit tests
         run: ./gradlew jvmTest jsNodeTest jsBrowserTest linuxX64Test
       - name: Generate kover coverage report
@@ -49,3 +51,24 @@ jobs:
           min-coverage-overall: 90
           min-coverage-changed-files: 90
           coverage-counter-type: LINE
+
+  ios-tests:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+      - name: Executable Gradlew file
+        run: chmod +x ./gradlew
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: ${{ runner.os }}-gradle-
+      - name: Run iOS tests
+        # iosX64Test / iosSimulatorArm64Test run on simulators.
+        # iosArm64MainKlibrary verifies the device target compiles
+        # (real-device tests need a physical device, not available on CI).
+        run: ./gradlew iosX64Test iosSimulatorArm64Test iosArm64MainKlibrary

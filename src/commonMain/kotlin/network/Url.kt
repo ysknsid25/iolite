@@ -29,7 +29,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class Url(private val value: String) : ValueObject<String> {
+public value class Url(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped URL and returns the trimmed form.
@@ -60,7 +60,7 @@ value class Url(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "Url($value)"
 
-    companion object {
+    private companion object {
         /** Maximum accepted URL length (inclusive), matching common browser limits. */
         private const val MAX_URL_LENGTH = 2048
     }

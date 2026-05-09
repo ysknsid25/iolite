@@ -24,7 +24,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc791">RFC 791 — Internet Protocol</a>
  */
 @JvmInline
-value class IpV4(private val value: String) : ValueObject<String> {
+public value class IpV4(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped IPv4 address and returns the trimmed form.
@@ -53,7 +53,7 @@ value class IpV4(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "IpV4($value)"
 
-    companion object {
+    private companion object {
         @Suppress("MaxLineLength")
         private val ipv4Regex = Regex(
             "^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\$"

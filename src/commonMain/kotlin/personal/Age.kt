@@ -20,7 +20,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class Age(private val value: Int) : ValueObject<Int> {
+public value class Age(private val value: Int) : ValueObject<Int> {
 
     /**
      * Validates the wrapped age and returns it unchanged.
@@ -47,11 +47,11 @@ value class Age(private val value: Int) : ValueObject<Int> {
      */
     override fun toString(): String = "Age($value)"
 
-    companion object {
+    public companion object {
         /** Minimum accepted age (inclusive). */
-        const val MIN_AGE = 0
+        public const val MIN_AGE: Int = 0
 
         /** Maximum accepted age (inclusive). */
-        const val MAX_AGE = 200 // I hope this number keeps getting bigger
+        public const val MAX_AGE: Int = 200 // I hope this number keeps getting bigger
     }
 }

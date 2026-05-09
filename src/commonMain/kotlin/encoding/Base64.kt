@@ -25,7 +25,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc4648#section-4">RFC 4648 §4 — Base64</a>
  */
 @JvmInline
-value class Base64(private val value: String) : ValueObject<String> {
+public value class Base64(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped value as standard-alphabet Base64 and returns the trimmed form.
      *

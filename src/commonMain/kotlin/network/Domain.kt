@@ -25,7 +25,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class Domain(private val value: String) : ValueObject<String> {
+public value class Domain(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped domain and returns the trimmed form.

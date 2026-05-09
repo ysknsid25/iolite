@@ -24,7 +24,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class HostName(private val value: String) : ValueObject<String> {
+public value class HostName(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped hostname and returns the trimmed form.

@@ -29,7 +29,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc5322">RFC 5322 — Internet Message Format</a>
  */
 @JvmInline
-value class Email(private val value: String) : ValueObject<String> {
+public value class Email(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped email and returns the normalized form

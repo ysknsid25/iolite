@@ -30,7 +30,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc4632">RFC 4632 — CIDR</a>
  */
 @JvmInline
-value class Cidr(private val value: String) : ValueObject<String> {
+public value class Cidr(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped CIDR notation (either IPv4 or IPv6) and returns the trimmed form.
@@ -57,7 +57,7 @@ value class Cidr(private val value: String) : ValueObject<String> {
      *
      * Does not throw — usable both before and after [parse].
      */
-    fun isV4(): Boolean {
+    public fun isV4(): Boolean {
         return cidrRegexV4.matches(value.trim())
     }
 
@@ -66,7 +66,7 @@ value class Cidr(private val value: String) : ValueObject<String> {
      *
      * Does not throw — usable both before and after [parse].
      */
-    fun isV6(): Boolean {
+    public fun isV6(): Boolean {
         return cidrRegexV6.matches(value.trim())
     }
 
@@ -76,7 +76,7 @@ value class Cidr(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "Cidr($value)"
 
-    companion object {
+    private companion object {
         @Suppress("MaxLineLength")
         private val cidrRegexV4 = Regex(
             "^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\/(3[0-2]|[12]?[0-9])\$"

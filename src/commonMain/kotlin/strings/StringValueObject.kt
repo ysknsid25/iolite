@@ -35,7 +35,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class StringValueObject(private val value: String) : ValueObject<String> {
+public value class StringValueObject(private val value: String) : ValueObject<String> {
 
     /**
      * Returns the wrapped string unchanged.
@@ -55,7 +55,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @return `this`, for chaining.
      * @throws IoliteException with [rule = NotEmpty][IoliteException.Rule.NotEmpty] if the value is empty.
      */
-    fun notEmpty(): StringValueObject {
+    public fun notEmpty(): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.NotEmpty,
@@ -73,7 +73,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @return `this`, for chaining.
      * @throws IoliteException with [rule = Min][IoliteException.Rule.Min] if the length is below [threshold].
      */
-    fun min(threshold: Int): StringValueObject {
+    public fun min(threshold: Int): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.Min,
@@ -91,7 +91,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @return `this`, for chaining.
      * @throws IoliteException with [rule = Max][IoliteException.Rule.Max] if the length exceeds [threshold].
      */
-    fun max(threshold: Int): StringValueObject {
+    public fun max(threshold: Int): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.Max,
@@ -109,7 +109,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @throws IoliteException with [rule = StartWith][IoliteException.Rule.StartWith]
      *         if the value does not start with [prefix].
      */
-    fun startWith(prefix: String): StringValueObject {
+    public fun startWith(prefix: String): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.StartWith,
@@ -127,7 +127,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @throws IoliteException with [rule = EndWith][IoliteException.Rule.EndWith]
      *         if the value does not end with [suffix].
      */
-    fun endWith(suffix: String): StringValueObject {
+    public fun endWith(suffix: String): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.EndWith,
@@ -146,7 +146,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @throws IoliteException with [rule = Regex][IoliteException.Rule.Regex]
      *         if the value does not match [regex].
      */
-    fun regex(regex: Regex): StringValueObject {
+    public fun regex(regex: Regex): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.Regex,
@@ -166,7 +166,7 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
      * @throws IoliteException with [rule = CustomerValidation][IoliteException.Rule.CustomerValidation]
      *         if [validation] returns `false`.
      */
-    fun customerValidation(validation: (String) -> Boolean, errorMessage: String): StringValueObject {
+    public fun customerValidation(validation: (String) -> Boolean, errorMessage: String): StringValueObject {
         ioliteRequire(
             target = IoliteException.Target.StringValueObject,
             rule = IoliteException.Rule.CustomerValidation,

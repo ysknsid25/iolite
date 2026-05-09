@@ -22,7 +22,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class AlphaNumericString(private val value: String) : ValueObject<StringValueObject> {
+public value class AlphaNumericString(private val value: String) : ValueObject<StringValueObject> {
 
     /**
      * Validates the wrapped value as an alphanumeric string and wraps it for further chaining.

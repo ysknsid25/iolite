@@ -23,7 +23,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class IntegerString(private val value: String) : ValueObject<StringValueObject> {
+public value class IntegerString(private val value: String) : ValueObject<StringValueObject> {
 
     /**
      * Validates the wrapped value as an integer string and wraps it for further chaining.

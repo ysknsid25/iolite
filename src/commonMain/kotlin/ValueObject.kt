@@ -31,7 +31,7 @@ package iolite
  *
  * @see IoliteException for the exception thrown on validation failure.
  */
-interface ValueObject<T> {
+public interface ValueObject<T> {
     /**
      * Validates the wrapped value and returns the normalized form.
      *
@@ -40,7 +40,7 @@ interface ValueObject<T> {
      * @return the normalized value (e.g. trimmed, lowercased, or otherwise canonicalised).
      * @throws IoliteException if the wrapped value violates the implementation's rules.
      */
-    fun parse(): T
+    public fun parse(): T
 
     /**
      * Result-based variant of [parse] that never throws.
@@ -59,7 +59,7 @@ interface ValueObject<T> {
      * @return [Result.success] holding the normalized value, or [Result.failure]
      *         wrapping the [IoliteException] thrown by [parse].
      */
-    fun safeParse(): Result<T> {
+    public fun safeParse(): Result<T> {
         return try {
             Result.success(parse())
         } catch (e: IoliteException) {

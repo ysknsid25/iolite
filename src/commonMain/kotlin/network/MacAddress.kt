@@ -26,7 +26,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class MacAddress(private val value: String) : ValueObject<String> {
+public value class MacAddress(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped MAC address and returns the trimmed form.
      *
@@ -53,7 +53,7 @@ value class MacAddress(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "MacAddress($value)"
 
-    companion object {
+    private companion object {
         @Suppress("MaxLineLength")
         private val macAddressRegex =
             Regex(
