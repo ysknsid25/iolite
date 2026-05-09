@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.Url
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class UrlTest {
     @Test
     fun invalidURLsShouldThrowExceptions() {
         for (url in invalidUrls) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for url='$url'") {
+            assertFailsWith<IoliteException>("Expected fail for url='$url'") {
                 Url(url).parse()
             }
         }
@@ -37,7 +38,7 @@ class UrlTest {
         for (url in invalidUrls) {
             val result = Url(url).safeParse()
             assertTrue(result.isFailure, "Expected failure for url='$url'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

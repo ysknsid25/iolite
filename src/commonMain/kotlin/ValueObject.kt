@@ -5,7 +5,7 @@ interface ValueObject<T> {
     fun safeParse(): Result<T> {
         return try {
             Result.success(parse())
-        } catch (e: IllegalArgumentException) {
+        } catch (e: IoliteException) {
             Result.failure(e)
         }
     }

@@ -1,5 +1,6 @@
 package personal
 
+import iolite.IoliteException
 import iolite.personal.Age
 import iolite.strings.IntegerString
 import kotlin.test.Test
@@ -12,7 +13,7 @@ class AgeTest {
     @Test
     fun parseShouldThrowExceptionForValuesBelowMINAGE() {
         val invalidAge = Age(Age.MIN_AGE - 1)
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             invalidAge.parse()
         }
         assertEquals(
@@ -24,7 +25,7 @@ class AgeTest {
     @Test
     fun parseShouldThrowExceptionForValuesAboveMAXAGE() {
         val invalidAge = Age(Age.MAX_AGE + 1)
-        val exception = assertFailsWith<IllegalArgumentException> {
+        val exception = assertFailsWith<IoliteException> {
             invalidAge.parse()
         }
         assertEquals(
@@ -56,14 +57,14 @@ class AgeTest {
     fun safeParseShouldReturnFailureForInvalidAgeBelow() {
         val result = Age(Age.MIN_AGE - 1).safeParse()
         assertTrue(result.isFailure)
-        assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+        assertFailsWith<IoliteException> { result.getOrThrow() }
     }
 
     @Test
     fun safeParseShouldReturnFailureForInvalidAgeAbove() {
         val result = Age(Age.MAX_AGE + 1).safeParse()
         assertTrue(result.isFailure)
-        assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+        assertFailsWith<IoliteException> { result.getOrThrow() }
     }
 
     @Test

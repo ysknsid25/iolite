@@ -1,7 +1,9 @@
 package iolite.datetime
 
+import iolite.IoliteException
 import iolite.ValueObject
 import iolite.datetime.Date.Companion.DATE_REGEX_SOURCE
+import iolite.ioliteRequire
 
 @Suppress("ArgumentListWrapping")
 class DateTime(
@@ -13,9 +15,13 @@ class DateTime(
     override fun parse(): String {
         val normalized = value.trim()
         val regex = buildRegex()
-        require(
-            regex.matches(normalized)
-        ) { "Invalid datetime format: '$value' for precision: $precision, offset: $offset, local: $local" }
+        ioliteRequire(
+            target = IoliteException.Target.DateTime,
+            rule = IoliteException.Rule.Format,
+            condition = regex.matches(normalized),
+        ) {
+            "Invalid datetime format: '$value' for precision: $precision, offset: $offset, local: $local"
+        }
         return normalized
     }
 

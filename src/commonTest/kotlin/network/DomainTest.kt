@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.Domain
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -19,7 +20,7 @@ class DomainTest {
     fun parseShouldThrowExceptionForInvalidDomains() {
         for (input in invalidDomains) {
             val domain = Domain(input)
-            val exception = assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            val exception = assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 domain.parse()
             }
             assertTrue(

@@ -1,5 +1,6 @@
 package id
 
+import iolite.IoliteException
 import iolite.id.Uuid
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class UuidTest {
     @Test
     fun invalidUUIDsShouldThrowExceptions() {
         for (input in invalidUUIDs) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 Uuid(input).parse()
             }
         }
@@ -37,7 +38,7 @@ class UuidTest {
         for (input in invalidUUIDs) {
             val result = Uuid(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

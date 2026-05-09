@@ -1,6 +1,8 @@
 package iolite.strings
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -11,49 +13,77 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
     }
 
     fun notEmpty(): StringValueObject {
-        require(value.isNotEmpty()) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.NotEmpty,
+            condition = value.isNotEmpty(),
+        ) {
             "String value cannot be empty"
         }
         return this
     }
 
     fun min(threshold: Int): StringValueObject {
-        require(value.length >= threshold) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.Min,
+            condition = value.length >= threshold,
+        ) {
             "Value $value is less than minimum threshold $threshold"
         }
         return this
     }
 
     fun max(threshold: Int): StringValueObject {
-        require(value.length <= threshold) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.Max,
+            condition = value.length <= threshold,
+        ) {
             "Value $value is greater than maximum threshold $threshold"
         }
         return this
     }
 
     fun startWith(prefix: String): StringValueObject {
-        require(value.startsWith(prefix)) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.StartWith,
+            condition = value.startsWith(prefix),
+        ) {
             "Value $value does not start with $prefix"
         }
         return this
     }
 
     fun endWith(suffix: String): StringValueObject {
-        require(value.endsWith(suffix)) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.EndWith,
+            condition = value.endsWith(suffix),
+        ) {
             "Value $value does not end with $suffix"
         }
         return this
     }
 
     fun regex(regex: Regex): StringValueObject {
-        require(value.matches(regex)) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.Regex,
+            condition = value.matches(regex),
+        ) {
             "Value $value does not match regex pattern ${regex.pattern}"
         }
         return this
     }
 
     fun customerValidation(validation: (String) -> Boolean, errorMessage: String): StringValueObject {
-        require(validation(value)) {
+        ioliteRequire(
+            target = IoliteException.Target.StringValueObject,
+            rule = IoliteException.Rule.CustomerValidation,
+            condition = validation(value),
+        ) {
             errorMessage
         }
         return this

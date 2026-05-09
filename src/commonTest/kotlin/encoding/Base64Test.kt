@@ -1,5 +1,6 @@
 package encoding
 
+import iolite.IoliteException
 import iolite.encoding.Base64
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class Base64Test {
     @Test
     fun invalidBase64ShouldThrowExceptions() {
         for (base64 in invalidBase64Strings) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for base64='$base64'") {
+            assertFailsWith<IoliteException>("Expected fail for base64='$base64'") {
                 Base64(base64).parse()
             }
         }
@@ -37,7 +38,7 @@ class Base64Test {
         for (base64 in invalidBase64Strings) {
             val result = Base64(base64).safeParse()
             assertTrue(result.isFailure, "Expected failure for base64='$base64'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

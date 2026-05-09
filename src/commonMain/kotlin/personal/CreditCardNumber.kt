@@ -1,20 +1,34 @@
 package iolite.personal
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
 value class CreditCardNumber(private val value: String) : ValueObject<String> {
 
     override fun parse(): String {
-        require(CREDIT_CARD_REGEX.matches(value)) {
+        ioliteRequire(
+            target = IoliteException.Target.CreditCardNumber,
+            rule = IoliteException.Rule.Format,
+            condition = CREDIT_CARD_REGEX.matches(value),
+        ) {
             "Invalid credit card format: $value"
         }
         val sanitizedNumber = value.replace(SANITIZE_REGEX, "")
-        require(PROVIDER_REGEX_LIST.any { it.matches(sanitizedNumber) }) {
+        ioliteRequire(
+            target = IoliteException.Target.CreditCardNumber,
+            rule = IoliteException.Rule.Provider,
+            condition = PROVIDER_REGEX_LIST.any { it.matches(sanitizedNumber) },
+        ) {
             "Unknown card provider: $value"
         }
-        require(isLuhnAlgo(sanitizedNumber)) {
+        ioliteRequire(
+            target = IoliteException.Target.CreditCardNumber,
+            rule = IoliteException.Rule.Luhn,
+            condition = isLuhnAlgo(sanitizedNumber),
+        ) {
             "Invalid credit card number (Luhn check failed): $value"
         }
         return value

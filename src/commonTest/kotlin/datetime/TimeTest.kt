@@ -1,5 +1,6 @@
 package datetime
 
+import iolite.IoliteException
 import iolite.datetime.Time
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class TimeTest {
     @Test
     fun invalidTimesShouldThrowExceptions() {
         for (time in invalidTimes) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for time='$time'") {
+            assertFailsWith<IoliteException>("Expected fail for time='$time'") {
                 Time(time).parse()
             }
         }
@@ -37,7 +38,7 @@ class TimeTest {
         for (time in invalidTimes) {
             val result = Time(time).safeParse()
             assertTrue(result.isFailure, "Expected failure for time='$time'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 
@@ -51,7 +52,7 @@ class TimeTest {
     @Test
     fun invalidTimesPrecision2ShouldThrowExceptions() {
         for (time in invalidTimesPrecision2) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for time='$time'") {
+            assertFailsWith<IoliteException>("Expected fail for time='$time'") {
                 Time(time, 2).parse()
             }
         }

@@ -1,5 +1,6 @@
 package datetime
 
+import iolite.IoliteException
 import iolite.datetime.Date
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class DateTest {
     @Test
     fun invalidDatesShouldThrowExceptions() {
         for (date in invalidDates) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for date='$date'") {
+            assertFailsWith<IoliteException>("Expected fail for date='$date'") {
                 Date(date).parse()
             }
         }
@@ -37,7 +38,7 @@ class DateTest {
         for (date in invalidDates) {
             val result = Date(date).safeParse()
             assertTrue(result.isFailure, "Expected failure for date='$date'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

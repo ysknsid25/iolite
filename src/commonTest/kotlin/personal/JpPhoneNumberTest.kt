@@ -1,5 +1,6 @@
 package personal
 
+import iolite.IoliteException
 import iolite.personal.JpPhoneNumber
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,7 +22,7 @@ class JpPhoneNumberTest {
     @Test
     fun invalidJapanesePhoneNumberShouldThrowExceptions() {
         for (jpPhoneNumber in invalidJpPhoneNumber) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for jpPhoneNumber='$jpPhoneNumber'") {
+            assertFailsWith<IoliteException>("Expected fail for jpPhoneNumber='$jpPhoneNumber'") {
                 JpPhoneNumber(jpPhoneNumber).parse()
             }
         }
@@ -41,7 +42,7 @@ class JpPhoneNumberTest {
         for (jpPhoneNumber in invalidJpPhoneNumber) {
             val result = JpPhoneNumber(jpPhoneNumber).safeParse()
             assertTrue(result.isFailure, "Expected failure for jpPhoneNumber='$jpPhoneNumber'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

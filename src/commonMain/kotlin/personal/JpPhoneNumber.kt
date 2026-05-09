@@ -1,6 +1,8 @@
 package iolite.personal
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @Suppress("Indentation")
@@ -9,10 +11,13 @@ value class JpPhoneNumber(private val value: String) : ValueObject<String> {
     override fun parse(): String {
         val normalized = value.trim()
 
-        require(
-            !normalized.startsWith("-") && !normalized.endsWith("-") && !normalized.contains("--") && normalized.all {
-                it.isDigit() || it == '-'
-            }
+        ioliteRequire(
+            target = IoliteException.Target.JpPhoneNumber,
+            rule = IoliteException.Rule.Characters,
+            condition = !normalized.startsWith("-") &&
+                !normalized.endsWith("-") &&
+                !normalized.contains("--") &&
+                normalized.all { it.isDigit() || it == '-' },
         ) {
             "Invalid format: contains invalid characters or invalid hyphen usage in '$value'"
         }
@@ -37,7 +42,11 @@ value class JpPhoneNumber(private val value: String) : ValueObject<String> {
             else -> false
         }
 
-        require(isValid) {
+        ioliteRequire(
+            target = IoliteException.Target.JpPhoneNumber,
+            rule = IoliteException.Rule.Format,
+            condition = isValid,
+        ) {
             "Invalid Japanese Phone Number: '$value'"
         }
         return normalized

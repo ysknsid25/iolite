@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.IpV4
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class IpV4Test {
     @Test
     fun invalidIPAddressesShouldThrowExceptions() {
         for (ipAddress in invalidIpAddresses) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for ipAddress='$ipAddress'") {
+            assertFailsWith<IoliteException>("Expected fail for ipAddress='$ipAddress'") {
                 IpV4(ipAddress).parse()
             }
         }
@@ -37,7 +38,7 @@ class IpV4Test {
         for (ipAddress in invalidIpAddresses) {
             val result = IpV4(ipAddress).safeParse()
             assertTrue(result.isFailure, "Expected failure for ipAddress='$ipAddress'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

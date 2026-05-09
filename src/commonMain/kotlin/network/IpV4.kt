@@ -1,6 +1,8 @@
 package iolite.network
 
+import iolite.IoliteException
 import iolite.ValueObject
+import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
 @JvmInline
@@ -9,8 +11,10 @@ value class IpV4(private val value: String) : ValueObject<String> {
     @Suppress("MaxLineLength")
     override fun parse(): String {
         val normalized = value.trim()
-        require(
-            ipv4Regex.matches(normalized)
+        ioliteRequire(
+            target = IoliteException.Target.IpV4,
+            rule = IoliteException.Rule.Format,
+            condition = ipv4Regex.matches(normalized),
         ) {
             "Invalid IPV4 Address: $value"
         }

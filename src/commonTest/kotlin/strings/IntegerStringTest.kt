@@ -1,5 +1,6 @@
 package strings
 
+import iolite.IoliteException
 import iolite.strings.IntegerString
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,7 +19,7 @@ class IntegerStringTest {
     @Test
     fun invalidIntegerCharacterInputsShouldThrowExceptions() {
         for (input in invalidIntegerInputs) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
+            assertFailsWith<IoliteException>("Expected fail for input='$input'") {
                 IntegerString(input).parse()
             }
         }
@@ -38,7 +39,7 @@ class IntegerStringTest {
         for (input in invalidIntegerInputs) {
             val result = IntegerString(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 

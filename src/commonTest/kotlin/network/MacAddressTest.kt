@@ -1,5 +1,6 @@
 package network
 
+import iolite.IoliteException
 import iolite.network.MacAddress
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class MacAddressTest {
     @Test
     fun invalidMACAddressesShouldThrowExceptions() {
         for (macAddress in invalidMacAddresses) {
-            assertFailsWith<IllegalArgumentException>("Expected fail for macAddress='$macAddress'") {
+            assertFailsWith<IoliteException>("Expected fail for macAddress='$macAddress'") {
                 MacAddress(macAddress).parse()
             }
         }
@@ -37,7 +38,7 @@ class MacAddressTest {
         for (macAddress in invalidMacAddresses) {
             val result = MacAddress(macAddress).safeParse()
             assertTrue(result.isFailure, "Expected failure for macAddress='$macAddress'")
-            assertFailsWith<IllegalArgumentException> { result.getOrThrow() }
+            assertFailsWith<IoliteException> { result.getOrThrow() }
         }
     }
 
