@@ -21,7 +21,7 @@ import kotlin.jvm.JvmInline
  * ```
  */
 @JvmInline
-value class JpPostalCode(private val value: String) : ValueObject<String> {
+public value class JpPostalCode(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped postal code and returns the trimmed form.
      *

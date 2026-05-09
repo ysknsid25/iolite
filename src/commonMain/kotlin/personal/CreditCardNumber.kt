@@ -30,7 +30,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a>
  */
 @JvmInline
-value class CreditCardNumber(private val value: String) : ValueObject<String> {
+public value class CreditCardNumber(private val value: String) : ValueObject<String> {
 
     /**
      * Validates the wrapped credit card number and returns it unchanged.
@@ -104,7 +104,7 @@ value class CreditCardNumber(private val value: String) : ValueObject<String> {
         return sum % 10 == 0
     }
 
-    companion object {
+    private companion object {
         private const val LAST_VISIBLE_DIGITS = 4
         private val SANITIZE_REGEX = Regex("[- ]")
         private val NON_DIGIT_REGEX = Regex("\\D")

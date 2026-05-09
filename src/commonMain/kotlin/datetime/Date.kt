@@ -26,7 +26,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
  */
 @JvmInline
-value class Date(private val value: String) : ValueObject<String> {
+public value class Date(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped date and returns the trimmed form.
      *
@@ -53,14 +53,14 @@ value class Date(private val value: String) : ValueObject<String> {
      */
     override fun toString(): String = "Date($value)"
 
-    companion object {
+    public companion object {
         /**
          * Regex source (without surrounding `^…$` anchors) describing a valid
          * `YYYY-MM-DD` calendar date with leap-year handling. Exposed for
          * reuse by [DateTime], which composes this with a time pattern.
          */
         @Suppress("MaxLineLength")
-        const val DATE_REGEX_SOURCE = """((\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\d|3[01])|(0[469]|11)-(0[1-9]|[12]\d|30)|(02)-(0[1-9]|1\d|2[0-8])))"""
+        public const val DATE_REGEX_SOURCE: String = """((\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\d|3[01])|(0[469]|11)-(0[1-9]|[12]\d|30)|(02)-(0[1-9]|1\d|2[0-8])))"""
         private val dateRegex = Regex("^$DATE_REGEX_SOURCE$")
     }
 }

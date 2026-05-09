@@ -38,3 +38,37 @@ And make sure that your CI has passed.
    - Use the issue number in the commit message.
 5. Push to the branch (`git push origin feature/{issue no}`)
 6. Create a new Pull Request
+
+## Binary compatibility
+
+iolite is a published library, so the JVM `.jar` is consumed by downstream projects without
+recompilation. To prevent accidental breakage we use the
+[Binary Compatibility Validator](https://github.com/Kotlin/binary-compatibility-validator)
+plugin and Kotlin's `explicitApi()` mode.
+
+The current public API is committed under `api/iolite.api`. CI runs `./gradlew apiCheck`
+on every PR — if your change touches the public API surface, the job will fail until the
+dump is updated.
+
+### When you change the public API
+
+1. Run `./gradlew apiDump -PdisableKlibApi=true` (omit the property in environments that
+   support every Native target).
+2. Inspect the diff in `api/iolite.api`. **Removed or changed signatures are binary-breaking.**
+3. Commit the updated `.api` file as part of your PR.
+
+### Reviewing the diff
+
+- **Adding** a new declaration is safe and only requires the dump update.
+- **Removing** a declaration, **changing a return type / parameter list**, or **tightening
+  visibility** breaks downstream consumers. Either keep the old signature alive — usually
+  via an overload or `@Deprecated(level = DeprecationLevel.HIDDEN)` shim — or call out the
+  break in the PR and bump the major version.
+- Adding a parameter with a default value to an existing function is **not** binary
+  compatible on the JVM. Add a new overload instead.
+
+### Explicit API mode
+
+Public declarations must spell out their visibility (`public`) and return type. The
+compiler enforces this. When something should be internal, mark it `internal` or `private`
+explicitly.

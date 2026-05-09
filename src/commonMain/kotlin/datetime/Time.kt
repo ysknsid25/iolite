@@ -29,7 +29,7 @@ import iolite.ioliteRequire
  *
  * @see <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
  */
-class Time(private val value: String, private val precision: Int? = null) : ValueObject<String> {
+public class Time(private val value: String, private val precision: Int? = null) : ValueObject<String> {
     /**
      * Validates the wrapped time and returns the trimmed form.
      *
@@ -56,8 +56,8 @@ class Time(private val value: String, private val precision: Int? = null) : Valu
      */
     override fun toString(): String = "Time(value=$value, precision=$precision)"
 
-    companion object {
-        fun timeRegexSource(precision: Int? = null): String {
+    public companion object {
+        public fun timeRegexSource(precision: Int? = null): String {
             val prefix = "[0-5]\\d"
             val secondsRegexSource = if (precision != null) {
                 "$prefix\\.\\d{$precision}"

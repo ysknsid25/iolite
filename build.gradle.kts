@@ -9,16 +9,29 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.9.1"
     id("org.jetbrains.dokka") version "2.0.0"
     id("com.vanniktech.maven.publish") version "0.34.0"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.16.3"
+}
+
+apiValidation {
+    @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
+    klib {
+        // Enable .klib API dumps for non-JVM targets (JS / Native).
+        // Disable on machines that cannot cross-compile every Native target
+        // by passing -PdisableKlibApi=true.
+        enabled = !project.hasProperty("disableKlibApi")
+    }
 }
 
 group = "io.github.ysknsid25.iolite"
-version = "beta-v5"
+version = "v1.0.0"
 
 repositories {
     mavenCentral()
 }
 
 kotlin {
+    explicitApi()
+
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_1_8)

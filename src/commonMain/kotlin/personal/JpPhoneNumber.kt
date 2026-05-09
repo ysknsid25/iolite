@@ -33,7 +33,7 @@ import kotlin.jvm.JvmInline
  */
 @Suppress("Indentation")
 @JvmInline
-value class JpPhoneNumber(private val value: String) : ValueObject<String> {
+public value class JpPhoneNumber(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped phone number and returns the trimmed form.
      *
@@ -101,7 +101,7 @@ value class JpPhoneNumber(private val value: String) : ValueObject<String> {
         return "JpPhoneNumber(***-****-$last4)"
     }
 
-    companion object {
+    private companion object {
         private const val LAST_VISIBLE_DIGITS = 4
 
         // --- 数字のみの文字列を検証するための正規表現 ---

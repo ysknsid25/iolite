@@ -25,7 +25,7 @@ import kotlin.jvm.JvmInline
  * @see <a href="https://datatracker.ietf.org/doc/html/rfc4122">RFC 4122 — UUID</a>
  */
 @JvmInline
-value class Uuid(private val value: String) : ValueObject<String> {
+public value class Uuid(private val value: String) : ValueObject<String> {
     /**
      * Validates the wrapped value as a canonical UUID string and returns the trimmed form.
      *
