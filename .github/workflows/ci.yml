@@ -68,4 +68,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
       - name: Run iOS tests
-        run: ./gradlew iosX64Test iosSimulatorArm64Test
+        # iosX64Test / iosSimulatorArm64Test run on simulators.
+        # iosArm64MainKlibrary verifies the device target compiles
+        # (real-device tests need a physical device, not available on CI).
+        run: ./gradlew iosX64Test iosSimulatorArm64Test iosArm64MainKlibrary
