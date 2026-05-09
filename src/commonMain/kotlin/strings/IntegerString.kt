@@ -18,4 +18,10 @@ value class IntegerString(private val value: String) : ValueObject<StringValueOb
         }
         return StringValueObject(value)
     }
+
+    /**
+     * Returns `IntegerString(value)`. The format is **not** part of the public
+     * API contract and may change.
+     */
+    override fun toString(): String = "IntegerString($value)"
 }

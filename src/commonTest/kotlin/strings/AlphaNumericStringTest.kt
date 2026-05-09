@@ -44,6 +44,11 @@ class AlphaNumericStringTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("AlphaNumericString(abc123)", AlphaNumericString("abc123").toString())
+    }
+
     companion object {
         private val validAlphaNumericInputs = listOf(
             "abc123",

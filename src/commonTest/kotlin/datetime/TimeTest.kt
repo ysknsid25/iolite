@@ -58,6 +58,18 @@ class TimeTest {
         }
     }
 
+    @Test
+    fun toStringShouldIncludeAllStateFields() {
+        assertEquals(
+            "Time(value=09:52:31, precision=null)",
+            Time("09:52:31").toString()
+        )
+        assertEquals(
+            "Time(value=09:52:31.12, precision=2)",
+            Time("09:52:31.12", precision = 2).toString()
+        )
+    }
+
     companion object {
         private val validTimes = listOf(
             "00:00:00",

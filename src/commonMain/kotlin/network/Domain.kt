@@ -22,4 +22,10 @@ value class Domain(private val value: String) : ValueObject<String> {
         }
         return normalized
     }
+
+    /**
+     * Returns `Domain(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "Domain($value)"
 }

@@ -63,6 +63,11 @@ class CidrTest {
         assertFalse(Cidr("192.168.0.0/24").isV6())
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Cidr(192.168.0.0/24)", Cidr("192.168.0.0/24").toString())
+    }
+
     companion object {
         private val validCidrs = listOf(
             "192.168.0.0/24",

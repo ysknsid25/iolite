@@ -104,6 +104,18 @@ class DateTimeTest {
         }
     }
 
+    @Test
+    fun toStringShouldIncludeAllStateFields() {
+        assertEquals(
+            "DateTime(value=1970-01-01T00:00:00Z, precision=null, offset=false, local=false)",
+            DateTime("1970-01-01T00:00:00Z").toString()
+        )
+        assertEquals(
+            "DateTime(value=1970-01-01T00:00:00Z, precision=0, offset=true, local=false)",
+            DateTime("1970-01-01T00:00:00Z", precision = 0, offset = true).toString()
+        )
+    }
+
     companion object {
         private val validDateTimes = listOf(
             "1970-01-01T00:00:00.000Z",

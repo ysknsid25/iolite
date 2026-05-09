@@ -19,6 +19,12 @@ value class MacAddress(private val value: String) : ValueObject<String> {
         return normalized
     }
 
+    /**
+     * Returns `MacAddress(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "MacAddress($value)"
+
     companion object {
         @Suppress("MaxLineLength")
         private val macAddressRegex =

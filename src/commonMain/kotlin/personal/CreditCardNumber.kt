@@ -14,7 +14,7 @@ value class CreditCardNumber(private val value: String) : ValueObject<String> {
             rule = IoliteException.Rule.Format,
             condition = CREDIT_CARD_REGEX.matches(value),
         ) {
-            "Invalid credit card format: $value"
+            "Invalid credit card format"
         }
         val sanitizedNumber = value.replace(SANITIZE_REGEX, "")
         ioliteRequire(
@@ -22,16 +22,27 @@ value class CreditCardNumber(private val value: String) : ValueObject<String> {
             rule = IoliteException.Rule.Provider,
             condition = PROVIDER_REGEX_LIST.any { it.matches(sanitizedNumber) },
         ) {
-            "Unknown card provider: $value"
+            "Unknown card provider"
         }
         ioliteRequire(
             target = IoliteException.Target.CreditCardNumber,
             rule = IoliteException.Rule.Luhn,
             condition = isLuhnAlgo(sanitizedNumber),
         ) {
-            "Invalid credit card number (Luhn check failed): $value"
+            "Invalid credit card number (Luhn check failed)"
         }
         return value
+    }
+
+    /**
+     * Returns a masked representation that exposes only the last 4 digits, e.g.
+     * `CreditCardNumber(****-****-****-1234)`. The exact mask format is **not**
+     * part of the public API contract and may change.
+     */
+    override fun toString(): String {
+        val digits = value.filter { it.isDigit() }
+        val last4 = digits.takeLast(LAST_VISIBLE_DIGITS).padStart(LAST_VISIBLE_DIGITS, '*')
+        return "CreditCardNumber(****-****-****-$last4)"
     }
 
     @Suppress("MagicNumber")
@@ -56,6 +67,7 @@ value class CreditCardNumber(private val value: String) : ValueObject<String> {
     }
 
     companion object {
+        private const val LAST_VISIBLE_DIGITS = 4
         private val SANITIZE_REGEX = Regex("[- ]")
         private val NON_DIGIT_REGEX = Regex("\\D")
         private val CREDIT_CARD_REGEX = Regex(

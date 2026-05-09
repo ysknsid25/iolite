@@ -20,4 +20,10 @@ value class Uuid(private val value: String) : ValueObject<String> {
         }
         return normalized
     }
+
+    /**
+     * Returns `Uuid(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "Uuid($value)"
 }

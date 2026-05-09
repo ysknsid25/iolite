@@ -28,6 +28,12 @@ value class Cidr(private val value: String) : ValueObject<String> {
         return cidrRegexV6.matches(value.trim())
     }
 
+    /**
+     * Returns `Cidr(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "Cidr($value)"
+
     companion object {
         @Suppress("MaxLineLength")
         private val cidrRegexV4 = Regex(

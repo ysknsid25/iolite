@@ -14,8 +14,14 @@ value class JpPostalCode(private val value: String) : ValueObject<String> {
             rule = IoliteException.Rule.Format,
             condition = Regex("""^\d{3}-?\d{4}$""").matches(normalized),
         ) {
-            "Invalid Japanese Postal Code: $value"
+            "Invalid Japanese Postal Code"
         }
         return normalized
     }
+
+    /**
+     * Returns `JpPostalCode(value)`. The format is **not** part of the public
+     * API contract and may change.
+     */
+    override fun toString(): String = "JpPostalCode($value)"
 }

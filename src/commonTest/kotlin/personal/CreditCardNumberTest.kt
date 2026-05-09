@@ -42,6 +42,28 @@ class CreditCardNumberTest {
         }
     }
 
+    @Test
+    fun toStringShouldMaskAllButLast4Digits() {
+        assertEquals(
+            "CreditCardNumber(****-****-****-4242)",
+            CreditCardNumber("4242424242424242").toString()
+        )
+        assertEquals(
+            "CreditCardNumber(****-****-****-1001)",
+            CreditCardNumber("4000-0025-0000-1001").toString()
+        )
+    }
+
+    @Test
+    fun toStringMustNotExposeFullCardNumber() {
+        val card = "4242424242424242"
+        val rendered = CreditCardNumber(card).toString()
+        assertTrue(
+            !rendered.contains(card.dropLast(4)),
+            "toString must not expose digits before the last 4: $rendered"
+        )
+    }
+
     companion object {
         private val validCardNumbers = listOf(
             "378282246310005",

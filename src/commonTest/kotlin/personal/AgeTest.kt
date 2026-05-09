@@ -17,7 +17,7 @@ class AgeTest {
             invalidAge.parse()
         }
         assertEquals(
-            "Invalid age: ${Age.MIN_AGE - 1}. Age must be between ${Age.MIN_AGE} and ${Age.MAX_AGE}.",
+            "Invalid age. Age must be between ${Age.MIN_AGE} and ${Age.MAX_AGE}.",
             exception.message
         )
     }
@@ -29,7 +29,7 @@ class AgeTest {
             invalidAge.parse()
         }
         assertEquals(
-            "Invalid age: ${Age.MAX_AGE + 1}. Age must be between ${Age.MIN_AGE} and ${Age.MAX_AGE}.",
+            "Invalid age. Age must be between ${Age.MIN_AGE} and ${Age.MAX_AGE}.",
             exception.message
         )
     }
@@ -73,5 +73,20 @@ class AgeTest {
         val result = validAgeMiddle.safeParse()
         assertTrue(result.isSuccess)
         assertEquals((Age.MIN_AGE + Age.MAX_AGE) / 2, validAgeMiddle.safeParse().getOrThrow())
+    }
+
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Age(30)", Age(30).toString())
+    }
+
+    @Test
+    fun parseErrorMessageMustNotExposeInputValue() {
+        val invalidValue = -42
+        val exception = assertFailsWith<IoliteException> { Age(invalidValue).parse() }
+        assertTrue(
+            exception.message?.contains(invalidValue.toString()) != true,
+            "error message must not echo the input value: ${exception.message}"
+        )
     }
 }

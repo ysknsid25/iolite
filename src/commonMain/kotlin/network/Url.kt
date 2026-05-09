@@ -23,6 +23,12 @@ value class Url(private val value: String) : ValueObject<String> {
         return normalized
     }
 
+    /**
+     * Returns `Url(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "Url($value)"
+
     companion object {
         private const val MAX_URL_LENGTH = 2048
     }

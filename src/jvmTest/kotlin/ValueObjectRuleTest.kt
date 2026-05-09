@@ -46,4 +46,17 @@ class ValueObjectRuleTest {
                 it.hasInterfaces()
             }
     }
+
+    @Test
+    fun `every value class overrides toString()`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .assertTrue { koClass ->
+                koClass.functions(includeNested = false).any { fn ->
+                    fn.name == "toString" && fn.hasModifier(KoModifier.OVERRIDE)
+                }
+            }
+    }
 }
