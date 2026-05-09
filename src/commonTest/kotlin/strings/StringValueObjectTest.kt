@@ -83,6 +83,11 @@ class StringValueObjectTest {
     }
 
     @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("StringValueObject(hello)", StringValueObject("hello").toString())
+    }
+
+    @Test
     fun methodChainingShouldSucceedAndReturnExpectedValue() {
         val valueObject = StringValueObject("prefix123suffix")
         val result = valueObject

@@ -22,4 +22,10 @@ value class HostName(private val value: String) : ValueObject<String> {
         }
         return normalized
     }
+
+    /**
+     * Returns `HostName(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "HostName($value)"
 }

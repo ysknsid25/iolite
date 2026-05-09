@@ -42,6 +42,11 @@ class DateTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Date(2022-01-31)", Date("2022-01-31").toString())
+    }
+
     companion object {
         private val validDates = listOf(
             "1970-01-01",

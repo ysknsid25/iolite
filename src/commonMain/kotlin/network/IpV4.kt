@@ -21,6 +21,12 @@ value class IpV4(private val value: String) : ValueObject<String> {
         return normalized
     }
 
+    /**
+     * Returns `IpV4(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "IpV4($value)"
+
     companion object {
         @Suppress("MaxLineLength")
         private val ipv4Regex = Regex(

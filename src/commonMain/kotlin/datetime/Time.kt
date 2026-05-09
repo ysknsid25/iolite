@@ -17,6 +17,12 @@ class Time(private val value: String, private val precision: Int? = null) : Valu
         return normalized
     }
 
+    /**
+     * Returns `Time(value=…, precision=…)`. The format is **not** part of the
+     * public API contract and may change.
+     */
+    override fun toString(): String = "Time(value=$value, precision=$precision)"
+
     companion object {
         fun timeRegexSource(precision: Int? = null): String {
             val prefix = "[0-5]\\d"

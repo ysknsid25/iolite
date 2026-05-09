@@ -24,7 +24,11 @@ class EmailTest {
     fun shouldThrowIllegalArgumentExceptionForInvalidEmail() {
         for (invalidEmail in invalidEmails) {
             val exception = assertFailsWith<IoliteException> { Email(invalidEmail).parse() }
-            assertEquals("Invalid email address: $invalidEmail", exception.message)
+            assertEquals("Invalid email address", exception.message)
+            assertTrue(
+                exception.message?.contains(invalidEmail) != true,
+                "error message must not echo the input value (PII leak): ${exception.message}"
+            )
         }
     }
 
@@ -51,6 +55,21 @@ class EmailTest {
             assertTrue(result.isFailure, "Expected failure for invalidEmail='$invalidEmail'")
             assertFailsWith<IoliteException> { result.getOrThrow() }
         }
+    }
+
+    @Test
+    fun toStringShouldMaskLocalPartAndPreserveDomain() {
+        assertEquals("Email(j***@example.com)", Email("john.doe@example.com").toString())
+        assertEquals("Email(a***@b.cd)", Email("alice@b.cd").toString())
+    }
+
+    @Test
+    fun toStringMustNotExposeFullLocalPart() {
+        val email = Email("sensitive.user@example.com").toString()
+        assertTrue(
+            !email.contains("sensitive.user"),
+            "toString must not expose full local part: $email"
+        )
     }
 
     companion object {

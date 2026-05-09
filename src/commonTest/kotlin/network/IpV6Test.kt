@@ -42,6 +42,11 @@ class IpV6Test {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("IpV6(::1)", IpV6("::1").toString())
+    }
+
     companion object {
         private val validIpAddresses = listOf(
             "1e5e:e6c8:daac:514b:114b:e360:d8c0:682c",

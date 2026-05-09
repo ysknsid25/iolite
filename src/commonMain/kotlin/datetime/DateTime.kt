@@ -25,6 +25,13 @@ class DateTime(
         return normalized
     }
 
+    /**
+     * Returns `DateTime(value=…, precision=…, offset=…, local=…)`. The format
+     * is **not** part of the public API contract and may change.
+     */
+    override fun toString(): String =
+        "DateTime(value=$value, precision=$precision, offset=$offset, local=$local)"
+
     private fun buildRegex(): Regex {
         val date = DATE_REGEX_SOURCE
         val timePart = when {

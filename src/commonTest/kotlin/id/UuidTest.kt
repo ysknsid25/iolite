@@ -42,6 +42,14 @@ class UuidTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals(
+            "Uuid(9491d710-3185-4e06-bea0-6a2f275345e0)",
+            Uuid("9491d710-3185-4e06-bea0-6a2f275345e0").toString()
+        )
+    }
+
     companion object {
         private val validUUIDs = listOf(
             "9491d710-3185-4e06-bea0-6a2f275345e0",

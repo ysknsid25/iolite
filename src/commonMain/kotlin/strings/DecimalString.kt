@@ -18,4 +18,10 @@ value class DecimalString(private val value: String) : ValueObject<StringValueOb
         }
         return StringValueObject(value)
     }
+
+    /**
+     * Returns `DecimalString(value)`. The format is **not** part of the public
+     * API contract and may change.
+     */
+    override fun toString(): String = "DecimalString($value)"
 }

@@ -42,6 +42,11 @@ class IpV4Test {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("IpV4(192.168.0.1)", IpV4("192.168.0.1").toString())
+    }
+
     companion object {
         private val validIpAddresses = listOf(
             "114.71.82.94",

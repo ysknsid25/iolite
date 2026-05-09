@@ -47,6 +47,11 @@ class HostNameTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("HostName(localhost)", HostName("localhost").toString())
+    }
+
     companion object {
         private val validHostNames = listOf(
             "localhost",

@@ -42,6 +42,14 @@ class MacAddressTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals(
+            "MacAddress(00:1A:2B:3C:4D:5E)",
+            MacAddress("00:1A:2B:3C:4D:5E").toString()
+        )
+    }
+
     companion object {
         @Suppress("LongMethod")
         private val validMacAddresses = listOf(

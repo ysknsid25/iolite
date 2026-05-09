@@ -47,6 +47,11 @@ class DomainTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Domain(example.com)", Domain("example.com").toString())
+    }
+
     companion object {
         private val validDomains = listOf(
             "example.com",

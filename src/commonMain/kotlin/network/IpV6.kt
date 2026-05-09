@@ -20,6 +20,12 @@ value class IpV6(private val value: String) : ValueObject<String> {
         return normalized
     }
 
+    /**
+     * Returns `IpV6(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "IpV6($value)"
+
     companion object {
         private fun ipv4Part(): String {
             val byte = "(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)"

@@ -46,6 +46,21 @@ class JpPhoneNumberTest {
         }
     }
 
+    @Test
+    fun toStringShouldMaskAllButLast4Digits() {
+        assertEquals("JpPhoneNumber(***-****-5678)", JpPhoneNumber("03-1234-5678").toString())
+        assertEquals("JpPhoneNumber(***-****-5678)", JpPhoneNumber("09012345678").toString())
+    }
+
+    @Test
+    fun toStringMustNotExposeFullPhoneNumber() {
+        val rendered = JpPhoneNumber("03-1234-5678").toString()
+        assertTrue(
+            !rendered.contains("1234"),
+            "toString must not expose digits before the last 4: $rendered"
+        )
+    }
+
     companion object {
         private val validJpPhoneNumber = listOf(
             "03-1234-5678",

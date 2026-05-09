@@ -18,4 +18,10 @@ value class AlphaNumericString(private val value: String) : ValueObject<StringVa
         }
         return StringValueObject(value)
     }
+
+    /**
+     * Returns `AlphaNumericString(value)`. The format is **not** part of the
+     * public API contract and may change.
+     */
+    override fun toString(): String = "AlphaNumericString($value)"
 }

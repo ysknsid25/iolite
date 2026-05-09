@@ -42,6 +42,11 @@ class Base64Test {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Base64(Zm9v)", Base64("Zm9v").toString())
+    }
+
     companion object {
         @Suppress("MaxLineLength")
         private val validBase64Strings = listOf(

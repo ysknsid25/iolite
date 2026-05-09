@@ -19,7 +19,7 @@ value class JpPhoneNumber(private val value: String) : ValueObject<String> {
                 !normalized.contains("--") &&
                 normalized.all { it.isDigit() || it == '-' },
         ) {
-            "Invalid format: contains invalid characters or invalid hyphen usage in '$value'"
+            "Invalid format: contains invalid characters or invalid hyphen usage"
         }
 
         val digitsOnly = normalized.replace("-", "")
@@ -47,12 +47,25 @@ value class JpPhoneNumber(private val value: String) : ValueObject<String> {
             rule = IoliteException.Rule.Format,
             condition = isValid,
         ) {
-            "Invalid Japanese Phone Number: '$value'"
+            "Invalid Japanese Phone Number"
         }
         return normalized
     }
 
+    /**
+     * Returns a masked representation that exposes only the last 4 digits, e.g.
+     * `JpPhoneNumber(***-****-5678)`. The exact mask format is **not** part of
+     * the public API contract and may change.
+     */
+    override fun toString(): String {
+        val digits = value.filter { it.isDigit() }
+        val last4 = digits.takeLast(LAST_VISIBLE_DIGITS).padStart(LAST_VISIBLE_DIGITS, '*')
+        return "JpPhoneNumber(***-****-$last4)"
+    }
+
     companion object {
+        private const val LAST_VISIBLE_DIGITS = 4
+
         // --- 数字のみの文字列を検証するための正規表現 ---
         private val mobileDigitsRegex = Regex("""^0(70|80|90)\d{8}$""")
         private val ipPhoneDigitsRegex = Regex("""^050\d{8}$""")

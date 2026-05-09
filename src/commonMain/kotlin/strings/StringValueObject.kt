@@ -88,4 +88,10 @@ value class StringValueObject(private val value: String) : ValueObject<String> {
         }
         return this
     }
+
+    /**
+     * Returns `StringValueObject(value)`. The format is **not** part of the
+     * public API contract and may change.
+     */
+    override fun toString(): String = "StringValueObject($value)"
 }

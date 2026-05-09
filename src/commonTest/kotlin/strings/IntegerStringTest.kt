@@ -43,6 +43,11 @@ class IntegerStringTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("IntegerString(123)", IntegerString("123").toString())
+    }
+
     companion object {
         private val validIntegerInputs = listOf(
             "123",

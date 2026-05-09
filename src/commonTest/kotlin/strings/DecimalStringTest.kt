@@ -42,6 +42,11 @@ class DecimalStringTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("DecimalString(123.45)", DecimalString("123.45").toString())
+    }
+
     companion object {
         private val validDecimalStrings = listOf(
             "123.45",

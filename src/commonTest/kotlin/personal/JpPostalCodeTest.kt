@@ -46,6 +46,11 @@ class JpPostalCodeTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("JpPostalCode(123-4567)", JpPostalCode("123-4567").toString())
+    }
+
     companion object {
         private val validJpPostalCodes = listOf(
             "123-4567",

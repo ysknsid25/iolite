@@ -21,4 +21,10 @@ value class Base64(private val value: String) : ValueObject<String> {
         }
         return normalized
     }
+
+    /**
+     * Returns `Base64(value)`. The format is **not** part of the public API
+     * contract and may change.
+     */
+    override fun toString(): String = "Base64($value)"
 }

@@ -42,6 +42,11 @@ class UrlTest {
         }
     }
 
+    @Test
+    fun toStringShouldRenderClassNameAndValue() {
+        assertEquals("Url(https://example.com)", Url("https://example.com").toString())
+    }
+
     companion object {
         private val validUrls = listOf(
             "https://example.com",
