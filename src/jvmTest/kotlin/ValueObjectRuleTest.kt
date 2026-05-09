@@ -59,4 +59,24 @@ class ValueObjectRuleTest {
                 }
             }
     }
+
+    @Test
+    fun `every value class declaration has KDoc`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .assertTrue { it.hasKDoc }
+    }
+
+    @Test
+    fun `every value class parse() has KDoc`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .flatMap { it.functions(includeNested = false) }
+            .filter { it.name == "parse" }
+            .assertTrue { it.hasKDoc }
+    }
 }

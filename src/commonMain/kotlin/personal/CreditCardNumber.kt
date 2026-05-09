@@ -5,9 +5,47 @@ import iolite.ValueObject
 import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
+/**
+ * Credit card number with major-brand provider detection and Luhn checksum validation.
+ *
+ * Accepts:
+ * - 14–19 contiguous digits (e.g. `4242424242424242`), or
+ * - 4-digit groups separated by either a single space or a single hyphen
+ *   (e.g. `4242 4242 4242 4242` or `4242-4242-4242-4242`).
+ * - The digits-only form must match one of the recognised provider patterns
+ *   (American Express, Diners Club, Discover, JCB, Mastercard, UnionPay, Visa).
+ * - The digits-only form must pass the Luhn checksum.
+ *
+ * Normalization: none — the value is returned exactly as supplied (separators preserved).
+ *
+ * ```kotlin
+ * val card: String = CreditCardNumber("4242 4242 4242 4242").parse()
+ * // → "4242 4242 4242 4242" (preserved as-is)
+ * ```
+ *
+ * Note: validation errors do **not** echo the input value, since card numbers
+ * are PCI-sensitive (see iolite's sensitivity policy). The provider list is
+ * modelled after Valibot's `creditCard` validator.
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a>
+ */
 @JvmInline
 value class CreditCardNumber(private val value: String) : ValueObject<String> {
 
+    /**
+     * Validates the wrapped credit card number and returns it unchanged.
+     *
+     * Validation runs in three stages: format, provider, then Luhn check.
+     *
+     * @return the credit card number with separators preserved (no normalization).
+     * @throws IoliteException with [target = CreditCardNumber][IoliteException.Target.CreditCardNumber]
+     *         and one of:
+     *         - [rule = Format][IoliteException.Rule.Format] — input does not match the digit / separator pattern.
+     *         - [rule = Provider][IoliteException.Rule.Provider] — input does not match any recognised brand.
+     *         - [rule = Luhn][IoliteException.Rule.Luhn] — input fails the Luhn checksum.
+     *
+     *         Error messages do not echo the input.
+     */
     override fun parse(): String {
         ioliteRequire(
             target = IoliteException.Target.CreditCardNumber,

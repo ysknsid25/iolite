@@ -5,9 +5,47 @@ import iolite.ValueObject
 import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
+/**
+ * Japanese phone number covering landline, mobile, IP phone, navi-dial, and toll-free formats.
+ *
+ * Accepts (after surrounding whitespace is trimmed):
+ * - Mobile (11 digits): `070`/`080`/`090` prefix, with or without hyphens
+ *   (e.g. `09012345678`, `090-1234-5678`).
+ * - IP phone (11 digits): `050` prefix, with or without hyphens (e.g. `050-1234-5678`).
+ * - Toll-free `0800` (11 digits): with or without hyphens (e.g. `0800-123-4567`).
+ * - Navi-dial (10 digits): `0570` prefix.
+ * - Toll-free `0120` (10 digits).
+ * - Landline (10 digits): leading `0` plus area code variants
+ *   (2 / 3 / 4 / 5 digit area codes), with or without hyphens.
+ * - Hyphens are allowed only between digit groups; leading, trailing, and consecutive
+ *   hyphens (`--`) are rejected, and characters other than digits and `-` are rejected.
+ *
+ * Normalization:
+ * - Surrounding whitespace is removed via `trim()`. Hyphens are preserved.
+ *
+ * ```kotlin
+ * val phone: String = JpPhoneNumber(" 090-1234-5678 ").parse()
+ * // → "090-1234-5678"
+ * ```
+ *
+ * Note: validation errors do **not** echo the input value, since phone numbers
+ * are PII (see iolite's sensitivity policy).
+ */
 @Suppress("Indentation")
 @JvmInline
 value class JpPhoneNumber(private val value: String) : ValueObject<String> {
+    /**
+     * Validates the wrapped phone number and returns the trimmed form.
+     *
+     * @return the trimmed phone number (hyphens preserved as written).
+     * @throws IoliteException with [target = JpPhoneNumber][IoliteException.Target.JpPhoneNumber] and:
+     *         - [rule = Characters][IoliteException.Rule.Characters] — input contains characters
+     *           other than digits / hyphens, or has bad hyphen placement.
+     *         - [rule = Format][IoliteException.Rule.Format] — input does not match any of the
+     *           supported phone-number kinds (landline / mobile / IP phone / navi-dial / toll-free).
+     *
+     *         Error messages do not echo the input.
+     */
     override fun parse(): String {
         val normalized = value.trim()
 

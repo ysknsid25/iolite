@@ -5,9 +5,41 @@ import iolite.ValueObject
 import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
+/**
+ * CIDR notation block covering both IPv4 and IPv6.
+ *
+ * Accepts (after surrounding whitespace is trimmed):
+ * - IPv4 CIDR: a valid IPv4 address followed by `/` and a prefix length in `0`–`32`
+ *   (e.g. `192.168.0.0/24`).
+ * - IPv6 CIDR: a valid IPv6 address (any of the forms accepted by [IpV6]) followed by
+ *   `/` and a prefix length in `0`–`128` (e.g. `2001:db8::/32`).
+ *
+ * Use [isV4] / [isV6] after a successful [parse] to discriminate which family
+ * the value represents.
+ *
+ * Normalization:
+ * - Surrounding whitespace is removed via `trim()`. The address and prefix are preserved.
+ *
+ * ```kotlin
+ * val cidr = Cidr("192.168.0.0/24")
+ * cidr.parse()    // → "192.168.0.0/24"
+ * cidr.isV4()     // true
+ * cidr.isV6()     // false
+ * ```
+ *
+ * @see <a href="https://datatracker.ietf.org/doc/html/rfc4632">RFC 4632 — CIDR</a>
+ */
 @JvmInline
 value class Cidr(private val value: String) : ValueObject<String> {
 
+    /**
+     * Validates the wrapped CIDR notation (either IPv4 or IPv6) and returns the trimmed form.
+     *
+     * @return the trimmed CIDR string.
+     * @throws IoliteException with [target = Cidr][IoliteException.Target.Cidr]
+     *         and [rule = Format][IoliteException.Rule.Format] if the value is not
+     *         a well-formed IPv4 or IPv6 CIDR block.
+     */
     override fun parse(): String {
         val normalized = value.trim()
         ioliteRequire(
@@ -20,10 +52,20 @@ value class Cidr(private val value: String) : ValueObject<String> {
         return normalized
     }
 
+    /**
+     * Returns `true` when the wrapped value (after trimming) parses as an IPv4 CIDR.
+     *
+     * Does not throw — usable both before and after [parse].
+     */
     fun isV4(): Boolean {
         return cidrRegexV4.matches(value.trim())
     }
 
+    /**
+     * Returns `true` when the wrapped value (after trimming) parses as an IPv6 CIDR.
+     *
+     * Does not throw — usable both before and after [parse].
+     */
     fun isV6(): Boolean {
         return cidrRegexV6.matches(value.trim())
     }
