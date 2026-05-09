@@ -5,9 +5,40 @@ import iolite.ValueObject
 import iolite.ioliteRequire
 import kotlin.jvm.JvmInline
 
+/**
+ * IPv6 address, including the `::` zero-compression form and IPv4-embedded variants.
+ *
+ * Accepts (after surrounding whitespace is trimmed):
+ * - Full form: eight groups of 1–4 hex digits separated by `:`
+ *   (e.g. `2001:0db8:85a3:0000:0000:8a2e:0370:7334`).
+ * - Compressed form: `::` standing in for one or more groups of zeros
+ *   (e.g. `2001:db8::1`, `::1`, `::`).
+ * - IPv4-embedded form: trailing dotted-decimal IPv4 portion
+ *   (e.g. `::ffff:192.168.0.1`).
+ * - CIDR suffixes (`/64`) are not accepted here — use [Cidr] for those.
+ *
+ * Normalization:
+ * - Surrounding whitespace is removed via `trim()`. The address itself is preserved
+ *   (no case folding, no canonical compression).
+ *
+ * ```kotlin
+ * IpV6("2001:db8::1").parse()             // → "2001:db8::1"
+ * IpV6("::ffff:192.168.0.1").parse()
+ * ```
+ *
+ * @see <a href="https://datatracker.ietf.org/doc/html/rfc4291">RFC 4291 — IPv6 Addressing Architecture</a>
+ */
 @JvmInline
 value class IpV6(private val value: String) : ValueObject<String> {
 
+    /**
+     * Validates the wrapped IPv6 address and returns the trimmed form.
+     *
+     * @return the trimmed IPv6 address.
+     * @throws IoliteException with [target = IpV6][IoliteException.Target.IpV6]
+     *         and [rule = Format][IoliteException.Rule.Format] if the value is not
+     *         a well-formed IPv6 address.
+     */
     override fun parse(): String {
         val normalized = value.trim()
         ioliteRequire(

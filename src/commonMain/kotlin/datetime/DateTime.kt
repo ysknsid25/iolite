@@ -5,6 +5,40 @@ import iolite.ValueObject
 import iolite.datetime.Date.Companion.DATE_REGEX_SOURCE
 import iolite.ioliteRequire
 
+/**
+ * ISO 8601-style date-time with configurable second-fraction precision and time-zone handling.
+ *
+ * Accepts (after surrounding whitespace is trimmed):
+ * - Date portion: a valid `YYYY-MM-DD` calendar date — same rules as [Date],
+ *   reusing [Date.DATE_REGEX_SOURCE].
+ * - Literal `T` separator, then `HH:MM[:SS[.fraction]]`. The fractional /
+ *   seconds requirement depends on [precision]:
+ *     - `precision = null` (default) — seconds and fractional digits are both optional.
+ *     - `precision = 0` — seconds are optional, no fractional digits permitted.
+ *     - `precision > 0` — seconds are required followed by exactly that many fractional digits.
+ * - Time-zone suffix depends on [zone]:
+ *     - [Zone.UTC] (default) — only the literal `Z` is accepted.
+ *     - [Zone.OFFSET] — accepts `Z` or `±HH:MM` / `±HHMM`.
+ *     - [Zone.LOCAL] — no zone suffix is permitted.
+ *
+ * Normalization:
+ * - Surrounding whitespace is removed via `trim()`. The rest of the string is preserved.
+ *
+ * Use one of the factory methods on the companion object for clarity:
+ *
+ * ```kotlin
+ * DateTime.utc("2024-01-02T03:04:05Z").parse()
+ * DateTime.utc("2024-01-02T03:04:05.123Z", precision = 3).parse()
+ * DateTime.withOffset("2024-01-02T03:04:05+09:00").parse()
+ * DateTime.local("2024-01-02T03:04:05").parse()
+ * ```
+ *
+ * @property value     the raw date-time string to validate.
+ * @property precision required number of fractional-second digits (see above).
+ * @property zone      time-zone suffix policy (see above).
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
+ */
 @Suppress("ArgumentListWrapping")
 public class DateTime(
     private val value: String,
@@ -37,6 +71,14 @@ public class DateTime(
         },
     )
 
+    /**
+     * Validates the wrapped date-time and returns the trimmed form.
+     *
+     * @return the trimmed date-time string.
+     * @throws IoliteException with [target = DateTime][IoliteException.Target.DateTime]
+     *         and [rule = Format][IoliteException.Rule.Format] if the value does not
+     *         match the pattern implied by the configured [precision] and [zone].
+     */
     override fun parse(): String {
         val normalized = value.trim()
         val regex = buildRegex()
@@ -91,12 +133,30 @@ public class DateTime(
     }
 
     public companion object {
+        /**
+         * Builds a [DateTime] that requires the trailing literal `Z` time-zone marker.
+         *
+         * @param value     the raw date-time string.
+         * @param precision required number of fractional-second digits, or `null` to make them optional.
+         */
         public fun utc(value: String, precision: Int? = null): DateTime =
             DateTime(value, precision, Zone.UTC)
 
+        /**
+         * Builds a [DateTime] that accepts either `Z` or a `±HH:MM` / `±HHMM` offset suffix.
+         *
+         * @param value     the raw date-time string.
+         * @param precision required number of fractional-second digits, or `null` to make them optional.
+         */
         public fun withOffset(value: String, precision: Int? = null): DateTime =
             DateTime(value, precision, Zone.OFFSET)
 
+        /**
+         * Builds a [DateTime] for local time — no zone suffix is permitted.
+         *
+         * @param value     the raw date-time string (must not include a time-zone suffix).
+         * @param precision required number of fractional-second digits, or `null` to make them optional.
+         */
         public fun local(value: String, precision: Int? = null): DateTime =
             DateTime(value, precision, Zone.LOCAL)
     }
