@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.github.ysknsid25.iolite"
-version = "beta-v4"
+version = "beta-v5"
 
 repositories {
     mavenCentral()
@@ -29,6 +29,11 @@ kotlin {
         nodejs()
     }
     linuxX64()
+    macosX64()
+    macosArm64()
+    iosArm64()
+    iosSimulatorArm64()
+    iosX64()
 
     sourceSets {
         val commonMain by getting
