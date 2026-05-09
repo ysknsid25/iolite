@@ -9,7 +9,7 @@ import kotlin.test.assertTrue
 
 class AlphaNumericStringTest {
     @Test
-    fun `valid AlphaNumericString inputs should parse successfully`() {
+    fun validAlphaNumericStringInputsShouldParseSuccessfully() {
         for (input in validAlphaNumericInputs) {
             val result = AlphaNumericString(input).parse()
             assertEquals(input, result.parse(), "Failed for input='$input'")
@@ -17,7 +17,7 @@ class AlphaNumericStringTest {
     }
 
     @Test
-    fun `invalid AlphaNumericString inputs should throw exceptions on parse`() {
+    fun invalidAlphaNumericStringInputsShouldThrowExceptionsOnParse() {
         for (input in invalidAlphaNumericInputs) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 AlphaNumericString(input).parse()
@@ -26,7 +26,7 @@ class AlphaNumericStringTest {
     }
 
     @Test
-    fun `safeParse should return success for valid AlphaNumericString inputs`() {
+    fun safeParseShouldReturnSuccessForValidAlphaNumericStringInputs() {
         for (input in validAlphaNumericInputs) {
             val result: Result<StringValueObject> = runCatching { AlphaNumericString(input).parse() }
             assertTrue(result.isSuccess, "Expected success for input='$input'")
@@ -35,7 +35,7 @@ class AlphaNumericStringTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid AlphaNumericString inputs`() {
+    fun safeParseShouldReturnFailureForInvalidAlphaNumericStringInputs() {
         for (input in invalidAlphaNumericInputs) {
             val result: Result<StringValueObject> = runCatching { AlphaNumericString(input).parse() }
             assertTrue(result.isFailure, "Expected failure for input='$input'")

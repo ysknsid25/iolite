@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class UrlTest {
     @Test
-    fun `valid URLs should parse successfully`() {
+    fun validURLsShouldParseSuccessfully() {
         for (url in validUrls) {
             assertEquals(url, Url(url).parse(), "Failed for url='$url'")
         }
     }
 
     @Test
-    fun `invalid URLs should throw exceptions`() {
+    fun invalidURLsShouldThrowExceptions() {
         for (url in invalidUrls) {
             assertFailsWith<IllegalArgumentException>("Expected fail for url='$url'") {
                 Url(url).parse()
@@ -24,7 +24,7 @@ class UrlTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (url in validUrls) {
             val result = Url(url).safeParse()
             assertTrue(result.isSuccess, "Expected success for url='$url'")
@@ -33,7 +33,7 @@ class UrlTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (url in invalidUrls) {
             val result = Url(url).safeParse()
             assertTrue(result.isFailure, "Expected failure for url='$url'")

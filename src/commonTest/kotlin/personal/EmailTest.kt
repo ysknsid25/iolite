@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class EmailTest {
     @Test
-    fun `should create Email instance for valid email`() {
+    fun shouldCreateEmailInstanceForValidEmail() {
         for (validEmail in validEmails) {
             val email = Email(validEmail)
             assertEquals(
@@ -20,7 +20,7 @@ class EmailTest {
     }
 
     @Test
-    fun `should throw IllegalArgumentException for invalid email`() {
+    fun shouldThrowIllegalArgumentExceptionForInvalidEmail() {
         for (invalidEmail in invalidEmails) {
             val exception = assertFailsWith<IllegalArgumentException> { Email(invalidEmail).parse() }
             assertEquals("Invalid email address: $invalidEmail", exception.message)
@@ -28,7 +28,7 @@ class EmailTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (validEmail in validEmails) {
             val result = Email(validEmail).safeParse()
             assertTrue(result.isSuccess, "Expected success for validEmail='$validEmail'")
@@ -37,7 +37,7 @@ class EmailTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (invalidEmail in invalidEmails) {
             val result = Email(invalidEmail).safeParse()
             assertTrue(result.isFailure, "Expected failure for invalidEmail='$invalidEmail'")

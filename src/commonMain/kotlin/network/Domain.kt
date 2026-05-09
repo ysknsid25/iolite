@@ -1,6 +1,7 @@
 package iolite.network
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 /**
  * Exact Domain Name (for FQDN)

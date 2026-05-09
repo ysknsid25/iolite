@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class DateTest {
     @Test
-    fun `valid dates should parse successfully`() {
+    fun validDatesShouldParseSuccessfully() {
         for (date in validDates) {
             assertEquals(date, Date(date).parse(), "Failed for date='$date'")
         }
     }
 
     @Test
-    fun `invalid dates should throw exceptions`() {
+    fun invalidDatesShouldThrowExceptions() {
         for (date in invalidDates) {
             assertFailsWith<IllegalArgumentException>("Expected fail for date='$date'") {
                 Date(date).parse()
@@ -24,7 +24,7 @@ class DateTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (date in validDates) {
             val result = Date(date).safeParse()
             assertTrue(result.isSuccess, "Expected success for date='$date'")
@@ -33,7 +33,7 @@ class DateTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (date in invalidDates) {
             val result = Date(date).safeParse()
             assertTrue(result.isFailure, "Expected failure for date='$date'")

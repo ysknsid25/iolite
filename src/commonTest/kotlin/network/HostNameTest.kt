@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class HostNameTest {
     @Test
-    fun `parse should succeed for valid hostnames`() {
+    fun parseShouldSucceedForValidHostnames() {
         for (input in validHostNames) {
             val hostName = HostName(input)
             assertEquals(input.trim(), hostName.parse(), "Failed for input='$input'")
@@ -16,7 +16,7 @@ class HostNameTest {
     }
 
     @Test
-    fun `parse should throw exception for invalid hostnames`() {
+    fun parseShouldThrowExceptionForInvalidHostnames() {
         for (input in invalidHostNames) {
             val hostName = HostName(input)
             val exception = assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
@@ -30,7 +30,7 @@ class HostNameTest {
     }
 
     @Test
-    fun `safeParse should succeed for valid hostnames`() {
+    fun safeParseShouldSucceedForValidHostnames() {
         for (input in validHostNames) {
             val hostName = HostName(input)
             assertTrue(hostName.safeParse().isSuccess, "Expected success for input='$input'")
@@ -39,7 +39,7 @@ class HostNameTest {
     }
 
     @Test
-    fun `safeParse should return null for invalid hostnames`() {
+    fun safeParseShouldReturnNullForInvalidHostnames() {
         for (input in invalidHostNames) {
             val hostName = HostName(input)
             assertTrue(hostName.safeParse().isFailure, "Expected failure for input='$input'")

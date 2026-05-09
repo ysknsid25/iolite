@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class IpV4Test {
     @Test
-    fun `valid IP Addresses should parse successfully`() {
+    fun validIPAddressesShouldParseSuccessfully() {
         for (ipAddress in validIpAddresses) {
             assertEquals(ipAddress, IpV4(ipAddress).parse(), "Failed for ipAddress='$ipAddress'")
         }
     }
 
     @Test
-    fun `invalid IP Addresses should throw exceptions`() {
+    fun invalidIPAddressesShouldThrowExceptions() {
         for (ipAddress in invalidIpAddresses) {
             assertFailsWith<IllegalArgumentException>("Expected fail for ipAddress='$ipAddress'") {
                 IpV4(ipAddress).parse()
@@ -24,7 +24,7 @@ class IpV4Test {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (ipAddress in validIpAddresses) {
             val result = IpV4(ipAddress).safeParse()
             assertTrue(result.isSuccess, "Expected success for ipAddress='$ipAddress'")
@@ -33,7 +33,7 @@ class IpV4Test {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (ipAddress in invalidIpAddresses) {
             val result = IpV4(ipAddress).safeParse()
             assertTrue(result.isFailure, "Expected failure for ipAddress='$ipAddress'")

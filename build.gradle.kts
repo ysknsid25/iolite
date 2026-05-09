@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.JavadocJar
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     kotlin("multiplatform") version "2.0.21"
@@ -11,7 +12,7 @@ plugins {
 }
 
 group = "io.github.ysknsid25.iolite"
-version = "beta-v3"
+version = "beta-v4"
 
 repositories {
     mavenCentral()
@@ -19,9 +20,13 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
+    }
+    js(IR) {
+        browser()
+        nodejs()
     }
 
     sourceSets {
@@ -59,7 +64,9 @@ detekt {
 mavenPublishing {
     configure(KotlinMultiplatform(javadocJar = JavadocJar.Dokka("dokkaHtml")))
     publishToMavenCentral()
-    signAllPublications()
+    if (project.hasProperty("signingInMemoryKey")) {
+        signAllPublications()
+    }
     coordinates(group.toString(), project.name, version.toString())
 
     pom {
@@ -88,16 +95,11 @@ mavenPublishing {
     }
 }
 
-tasks.named<Jar>("allMetadataJar") {
-    dependsOn(tasks.named("buildKotlinToolingMetadata"))
-    from(tasks.named("buildKotlinToolingMetadata").map { it.outputs.files })
-}
-
 tasks.dokkaHtml.configure {
     outputDirectory.set(file("${rootProject.projectDir}/docs"))
 }
 
-tasks.withType<Test>().configureEach {
+tasks.named<Test>("jvmTest") {
     useJUnitPlatform()
 }
 

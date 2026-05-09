@@ -8,14 +8,14 @@ import kotlin.test.assertFailsWith
 @Suppress("ArgumentListWrapping")
 class DateTimeTest {
     @Test
-    fun `valid datetimes should parse successfully`() {
+    fun validDatetimesShouldParseSuccessfully() {
         for (input in validDateTimes) {
             assertEquals(input, DateTime(input).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes should throw exceptions`() {
+    fun invalidDatetimesShouldThrowExceptions() {
         for (input in invalidDateTimes) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input).parse()
@@ -24,14 +24,14 @@ class DateTimeTest {
     }
 
     @Test
-    fun `valid datetimes noms should parse successfully`() {
+    fun validDatetimesNomsShouldParseSuccessfully() {
         for (input in validDateTimesNoMS) {
             assertEquals(input, DateTime(input, 0).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes noms should throw exceptions`() {
+    fun invalidDatetimesNomsShouldThrowExceptions() {
         for (input in invalidDateTimesNoMS) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input, 0).parse()
@@ -40,14 +40,14 @@ class DateTimeTest {
     }
 
     @Test
-    fun `valid datetimes 3ms should parse successfully`() {
+    fun validDatetimes3msShouldParseSuccessfully() {
         for (input in validDateTimes3Ms) {
             assertEquals(input, DateTime(input, 3).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes 3ms should throw exceptions`() {
+    fun invalidDatetimes3msShouldThrowExceptions() {
         for (input in invalidDateTimes3Ms) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input, 3).parse()
@@ -56,14 +56,14 @@ class DateTimeTest {
     }
 
     @Test
-    fun `valid datetimes with offset should parse successfully`() {
+    fun validDatetimesWithOffsetShouldParseSuccessfully() {
         for (input in validDateTimesOffset) {
             assertEquals(input, DateTime(input, offset = true).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes with offset should throw exceptions`() {
+    fun invalidDatetimesWithOffsetShouldThrowExceptions() {
         for (input in invalidDateTimesOffset) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input, offset = true).parse()
@@ -72,14 +72,14 @@ class DateTimeTest {
     }
 
     @Test
-    fun `valid datetimes with offset and no ms should parse successfully`() {
+    fun validDatetimesWithOffsetAndNoMsShouldParseSuccessfully() {
         for (input in validDateTimesOffsetNoMS) {
             assertEquals(input, DateTime(input, 0, offset = true).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes with offset and no ms should throw exceptions`() {
+    fun invalidDatetimesWithOffsetAndNoMsShouldThrowExceptions() {
         for (input in invalidDateTimesOffsetNoMS) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input, 0, offset = true).parse()
@@ -88,14 +88,14 @@ class DateTimeTest {
     }
 
     @Test
-    fun `valid datetimes with offset and 4ms should parse successfully`() {
+    fun validDatetimesWithOffsetAnd4msShouldParseSuccessfully() {
         for (input in validDateTimesOffset4Ms) {
             assertEquals(input, DateTime(input, 4, offset = true).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid datetimes with offset and 4ms should throw exceptions`() {
+    fun invalidDatetimesWithOffsetAnd4msShouldThrowExceptions() {
         for (input in invalidDateTimesOffset4Ms) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 DateTime(input, 4, offset = true).parse()

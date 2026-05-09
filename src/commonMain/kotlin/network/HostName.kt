@@ -1,6 +1,7 @@
 package iolite.network
 
 import iolite.ValueObject
+import kotlin.jvm.JvmInline
 
 /**
  * Any hostname (including localhost and internal names)

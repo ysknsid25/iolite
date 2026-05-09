@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class DomainTest {
     @Test
-    fun `parse should succeed for valid domains`() {
+    fun parseShouldSucceedForValidDomains() {
         for (input in validDomains) {
             val domain = Domain(input)
             assertEquals(input.trim(), domain.parse(), "Failed for input='$input'")
@@ -16,7 +16,7 @@ class DomainTest {
     }
 
     @Test
-    fun `parse should throw exception for invalid domains`() {
+    fun parseShouldThrowExceptionForInvalidDomains() {
         for (input in invalidDomains) {
             val domain = Domain(input)
             val exception = assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
@@ -30,7 +30,7 @@ class DomainTest {
     }
 
     @Test
-    fun `safeParse should succeed for valid domains`() {
+    fun safeParseShouldSucceedForValidDomains() {
         for (input in validDomains) {
             val domain = Domain(input)
             assertTrue(domain.safeParse().isSuccess, "Expected success for input='$input'")
@@ -39,7 +39,7 @@ class DomainTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid domains`() {
+    fun safeParseShouldReturnFailureForInvalidDomains() {
         for (input in invalidDomains) {
             val domain = Domain(input)
             assertTrue(domain.safeParse().isFailure, "Expected failure for input='$input'")

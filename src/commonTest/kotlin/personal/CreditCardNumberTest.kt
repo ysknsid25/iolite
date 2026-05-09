@@ -8,14 +8,14 @@ import kotlin.test.assertTrue
 
 class CreditCardNumberTest {
     @Test
-    fun `valid card numbers should parse successfully`() {
+    fun validCardNumbersShouldParseSuccessfully() {
         for (cardNumber in validCardNumbers) {
             assertEquals(cardNumber, CreditCardNumber(cardNumber).parse(), "Failed for cardNumber='$cardNumber'")
         }
     }
 
     @Test
-    fun `invalid card numbers should throw exceptions`() {
+    fun invalidCardNumbersShouldThrowExceptions() {
         for (cardNumber in invalidCardNumbers) {
             assertFailsWith<IllegalArgumentException>("Expected fail for cardNumber='$cardNumber'") {
                 CreditCardNumber(cardNumber).parse()
@@ -24,7 +24,7 @@ class CreditCardNumberTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (cardNumber in validCardNumbers) {
             val result = CreditCardNumber(cardNumber).safeParse()
             assertTrue(result.isSuccess, "Expected success for cardNumber='$cardNumber'")
@@ -33,7 +33,7 @@ class CreditCardNumberTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (cardNumber in invalidCardNumbers) {
             val result = CreditCardNumber(cardNumber).safeParse()
             assertTrue(result.isFailure, "Expected failure for cardNumber='$cardNumber'")

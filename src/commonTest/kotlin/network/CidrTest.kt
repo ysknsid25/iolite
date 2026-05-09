@@ -9,14 +9,14 @@ import kotlin.test.assertTrue
 
 class CidrTest {
     @Test
-    fun `valid CIDRs should parse successfully`() {
+    fun validCIDRsShouldParseSuccessfully() {
         for (input in validCidrs) {
             assertEquals(input, Cidr(input).parse(), "Failed for input='$input'")
         }
     }
 
     @Test
-    fun `invalid CIDRs should throw exceptions`() {
+    fun invalidCIDRsShouldThrowExceptions() {
         for (input in invalidCidrs) {
             assertFailsWith<IllegalArgumentException>("Expected fail for input='$input'") {
                 Cidr(input).parse()
@@ -25,7 +25,7 @@ class CidrTest {
     }
 
     @Test
-    fun `safeParse should return success for valid inputs`() {
+    fun safeParseShouldReturnSuccessForValidInputs() {
         for (input in validCidrs) {
             val result = Cidr(input).safeParse()
             assertTrue(result.isSuccess, "Expected success for input='$input'")
@@ -34,7 +34,7 @@ class CidrTest {
     }
 
     @Test
-    fun `safeParse should return failure for invalid inputs`() {
+    fun safeParseShouldReturnFailureForInvalidInputs() {
         for (input in invalidCidrs) {
             val result = Cidr(input).safeParse()
             assertTrue(result.isFailure, "Expected failure for input='$input'")
@@ -43,22 +43,22 @@ class CidrTest {
     }
 
     @Test
-    fun `isV4() should return valid result for IPv4 CIDRs`() {
+    fun isV4ShouldReturnValidResultForIPv4CIDRs() {
         assertTrue(Cidr("192.168.0.0/24").isV4())
     }
 
     @Test
-    fun `isV4() should return valid result for IPv6 CIDRs`() {
+    fun isV4ShouldReturnValidResultForIPv6CIDRs() {
         assertFalse(Cidr("2001:0db8:85a3:0000:0000:8a2e:0370:7334/128").isV4())
     }
 
     @Test
-    fun `isV6() should return valid result for IPv6 CIDRs`() {
+    fun isV6ShouldReturnValidResultForIPv6CIDRs() {
         assertTrue(Cidr("2001:0db8:85a3:0000:0000:8a2e:0370:7334/128").isV6())
     }
 
     @Test
-    fun `isV6() should return valid result for IPv4 CIDRs`() {
+    fun isV6ShouldReturnValidResultForIPv4CIDRs() {
         assertFalse(Cidr("192.168.0.0/24").isV6())
     }
 
