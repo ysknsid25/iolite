@@ -59,7 +59,11 @@ class DateTimeTest {
     @Test
     fun validDatetimesWithOffsetShouldParseSuccessfully() {
         for (input in validDateTimesOffset) {
-            assertEquals(input, DateTime(input, offset = true).parse(), "Failed for input='$input'")
+            assertEquals(
+                input,
+                DateTime(input, zone = DateTime.Zone.OFFSET).parse(),
+                "Failed for input='$input'",
+            )
         }
     }
 
@@ -67,7 +71,7 @@ class DateTimeTest {
     fun invalidDatetimesWithOffsetShouldThrowExceptions() {
         for (input in invalidDateTimesOffset) {
             assertFailsWith<IoliteException>("Expected fail for input='$input'") {
-                DateTime(input, offset = true).parse()
+                DateTime(input, zone = DateTime.Zone.OFFSET).parse()
             }
         }
     }
@@ -75,7 +79,11 @@ class DateTimeTest {
     @Test
     fun validDatetimesWithOffsetAndNoMsShouldParseSuccessfully() {
         for (input in validDateTimesOffsetNoMS) {
-            assertEquals(input, DateTime(input, 0, offset = true).parse(), "Failed for input='$input'")
+            assertEquals(
+                input,
+                DateTime(input, 0, DateTime.Zone.OFFSET).parse(),
+                "Failed for input='$input'",
+            )
         }
     }
 
@@ -83,7 +91,7 @@ class DateTimeTest {
     fun invalidDatetimesWithOffsetAndNoMsShouldThrowExceptions() {
         for (input in invalidDateTimesOffsetNoMS) {
             assertFailsWith<IoliteException>("Expected fail for input='$input'") {
-                DateTime(input, 0, offset = true).parse()
+                DateTime(input, 0, DateTime.Zone.OFFSET).parse()
             }
         }
     }
@@ -91,7 +99,11 @@ class DateTimeTest {
     @Test
     fun validDatetimesWithOffsetAnd4msShouldParseSuccessfully() {
         for (input in validDateTimesOffset4Ms) {
-            assertEquals(input, DateTime(input, 4, offset = true).parse(), "Failed for input='$input'")
+            assertEquals(
+                input,
+                DateTime(input, 4, DateTime.Zone.OFFSET).parse(),
+                "Failed for input='$input'",
+            )
         }
     }
 
@@ -99,22 +111,85 @@ class DateTimeTest {
     fun invalidDatetimesWithOffsetAnd4msShouldThrowExceptions() {
         for (input in invalidDateTimesOffset4Ms) {
             assertFailsWith<IoliteException>("Expected fail for input='$input'") {
-                DateTime(input, 4, offset = true).parse()
+                DateTime(input, 4, DateTime.Zone.OFFSET).parse()
             }
+        }
+    }
+
+    @Test
+    fun factoryMethodsShouldProduceEquivalentInstances() {
+        assertEquals(
+            DateTime("1970-01-01T00:00:00Z", zone = DateTime.Zone.UTC).parse(),
+            DateTime.utc("1970-01-01T00:00:00Z").parse(),
+        )
+        assertEquals(
+            DateTime("2020-10-14T17:42:29+09:00", zone = DateTime.Zone.OFFSET).parse(),
+            DateTime.withOffset("2020-10-14T17:42:29+09:00").parse(),
+        )
+        assertEquals(
+            DateTime("2020-10-14T17:42:29", zone = DateTime.Zone.LOCAL).parse(),
+            DateTime.local("2020-10-14T17:42:29").parse(),
+        )
+    }
+
+    @Test
+    fun localZoneShouldRejectTimezoneSuffix() {
+        // LOCAL: no timezone suffix
+        assertEquals(
+            "2020-10-14T17:42:29",
+            DateTime("2020-10-14T17:42:29", zone = DateTime.Zone.LOCAL).parse(),
+        )
+        assertFailsWith<IoliteException> {
+            DateTime("2020-10-14T17:42:29Z", zone = DateTime.Zone.LOCAL).parse()
+        }
+        assertFailsWith<IoliteException> {
+            DateTime("2020-10-14T17:42:29+09:00", zone = DateTime.Zone.LOCAL).parse()
         }
     }
 
     @Test
     fun toStringShouldIncludeAllStateFields() {
         assertEquals(
-            "DateTime(value=1970-01-01T00:00:00Z, precision=null, offset=false, local=false)",
-            DateTime("1970-01-01T00:00:00Z").toString()
+            "DateTime(value=1970-01-01T00:00:00Z, precision=null, zone=UTC)",
+            DateTime("1970-01-01T00:00:00Z").toString(),
         )
         assertEquals(
-            "DateTime(value=1970-01-01T00:00:00Z, precision=0, offset=true, local=false)",
-            DateTime("1970-01-01T00:00:00Z", precision = 0, offset = true).toString()
+            "DateTime(value=1970-01-01T00:00:00Z, precision=0, zone=OFFSET)",
+            DateTime("1970-01-01T00:00:00Z", precision = 0, zone = DateTime.Zone.OFFSET).toString(),
+        )
+        assertEquals(
+            "DateTime(value=2020-10-14T17:42:29, precision=null, zone=LOCAL)",
+            DateTime("2020-10-14T17:42:29", zone = DateTime.Zone.LOCAL).toString(),
         )
     }
+
+    @Suppress("DEPRECATION")
+    @Test
+    fun deprecatedConstructorShouldProduceSameValidationResult() {
+        // The deprecated (offset, local) constructor must yield the same parse
+        // result as the new Zone-based primary constructor for every state.
+        val cases = listOf(
+            DeprecatedCase("1970-01-01T00:00:00Z", null, offset = false, local = false, DateTime.Zone.UTC),
+            DeprecatedCase("2022-10-13T09:52:31Z", 0, offset = false, local = false, DateTime.Zone.UTC),
+            DeprecatedCase("2020-10-14T17:42:29+09:00", null, offset = true, local = false, DateTime.Zone.OFFSET),
+            DeprecatedCase("2020-10-14T17:42:29+0000", 0, offset = true, local = false, DateTime.Zone.OFFSET),
+            DeprecatedCase("2020-10-14T17:42:29", null, offset = false, local = true, DateTime.Zone.LOCAL),
+        )
+
+        for (case in cases) {
+            val viaDeprecated = DateTime(case.value, case.precision, case.offset, case.local).parse()
+            val viaNew = DateTime(case.value, case.precision, case.zone).parse()
+            assertEquals(viaNew, viaDeprecated, "Mismatch for $case")
+        }
+    }
+
+    private data class DeprecatedCase(
+        val value: String,
+        val precision: Int?,
+        val offset: Boolean,
+        val local: Boolean,
+        val zone: DateTime.Zone,
+    )
 
     companion object {
         private val validDateTimes = listOf(
